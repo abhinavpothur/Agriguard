@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriGuard AI — Smart Crop Health & Delivery System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  body { font-family: 'Inter', sans-serif; }
+  .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); }
+  .card-hover { transition: all 0.3s ease; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3); }
+  .pulse-dot { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .tab-active { background: linear-gradient(135deg,#059669,#10b981); color:white; }
+  .severity-high { background: #fee2e2; color:#b91c1c; }
+  .severity-med  { background: #fef3c7; color:#b45309; }
+  .severity-low  { background: #d1fae5; color:#047857; }
+  .progress-bar { transition: width 1s ease; }
+</style>
+
+<style id="fresh-editorial-theme">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--ink:#172b21;--muted:#68766c;--paper:#f5f4ed;--card:#fffefa;--line:#dfe5d8;--green:#245b3c;--lime:#c8f169;--soft:#e9f0e5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'DM Sans',sans-serif!important;background:var(--paper)!important;color:var(--ink)!important;letter-spacing:-.012em}
+h1,h2,h3,h4,.font-bold,.font-extrabold{font-family:'Manrope',sans-serif}
+::selection{background:var(--lime);color:var(--ink)}
+/* Replace the generic dark/gradient treatment with a warm editorial palette. */
+.bg-slate-950,.bg-slate-900,.bg-slate-900\/50,.bg-slate-900\/60,.bg-slate-900\/95,.bg-slate-800,.bg-slate-800\/60,.bg-slate-800\/50,.bg-slate-800\/40{background-color:var(--card)!important}
+.text-slate-100,.text-white{color:var(--ink)!important}
+.text-slate-300,.text-slate-400,.text-slate-500{color:var(--muted)!important}
+.border-slate-800,.border-slate-700,.border-slate-600{border-color:var(--line)!important}
+.bg-slate-700{background-color:#edf0e8!important;color:var(--ink)!important}
+.bg-emerald-600,.bg-emerald-500,.bg-indigo-600,.bg-indigo-500,.bg-cyan-600,.bg-rose-600{background-color:var(--green)!important;color:white!important}
+.bg-gradient-to-r,.bg-gradient-to-br{background-image:none!important}
+.from-emerald-500,.from-cyan-600,.to-cyan-500,.to-emerald-600{background-color:var(--green)!important}
+.text-transparent.bg-clip-text{color:var(--green)!important;background:none!important;-webkit-text-fill-color:var(--green)!important}
+.glass{background:var(--card)!important;border:1px solid var(--line)!important;backdrop-filter:none!important;border-radius:22px!important;box-shadow:0 8px 28px rgba(30,55,35,.045)}
+.card-hover{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card-hover:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(30,55,35,.1);border-color:#a9c5a8!important}
+button{font-family:'DM Sans',sans-serif;cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+button:hover{filter:brightness(.97)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b8df6b;outline-offset:3px}
+button.bg-gradient-to-r,button.bg-emerald-600,button.bg-indigo-600{background:var(--green)!important;color:#fff!important;border:1px solid var(--green)!important;box-shadow:0 7px 16px rgba(36,91,60,.13)}
+button.border{border-color:#cbd5c8!important}
+input,select{background:#fffefa!important;color:var(--ink)!important;border-color:var(--line)!important;border-radius:12px!important}
+input::placeholder{color:#89948a!important}
+nav{background:rgba(250,250,245,.94)!important;border-color:var(--line)!important;backdrop-filter:blur(16px)!important}
+#home{background:var(--paper);position:relative}
+#home>.absolute{background:radial-gradient(ellipse at 83% 24%,rgba(200,241,105,.24),transparent 36%),linear-gradient(120deg,#f5f4ed,#f0f3e8)!important}
+#home h1{font-size:clamp(3rem,6vw,5.6rem);letter-spacing:-.075em;line-height:.99;max-width:760px}
+#home p{color:#58685c!important;line-height:1.8}
+#home .glass{background:#fffefa!important;box-shadow:0 22px 60px rgba(35,63,39,.09);transform:rotate(1deg)}
+#home .bg-slate-800\/60{background:#f1f4ec!important}
+#features{background:#e9eee4!important}
+#features h2{letter-spacing:-.05em;font-size:clamp(2rem,4vw,3rem)}
+#features .glass{min-height:190px;padding:28px!important}
+#features i{width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:#edf3e7;color:var(--green)!important;font-size:22px!important}
+.tab-active{background:var(--green)!important;color:#fff!important}
+#dashboard{background:var(--paper)}
+#dashboard h2{letter-spacing:-.045em}
+#dashboard .tab-content>.glass,#dashboard .tab-content .glass{box-shadow:0 7px 24px rgba(30,55,35,.04)}
+#drop-zone{background:#f6f7f1!important;border-color:#b9c8b5!important;border-radius:18px!important}
+#drop-zone button{background:var(--green)!important;color:#fff!important}
+.severity-high{background:#fbe8e4;color:#a83f2d}.severity-med{background:#fff1cf;color:#8b5a00}.severity-low{background:#e4f3df;color:#28613b}
+#vision-result,#review-box{background:#fffefa!important}
+#dashboard .bg-slate-800\/50,#dashboard .bg-slate-800\/40{border:1px solid var(--line)}
+#dashboard .text-emerald-400,#dashboard .text-emerald-300{color:#28613b!important}
+#dashboard .text-cyan-400{color:#367b6b!important}
+#dashboard .text-rose-400,#dashboard .text-rose-300{color:#b64b3b!important}
+#dashboard .text-amber-400,#dashboard .text-amber-300{color:#93630c!important}
+#dashboard .text-indigo-400{color:#496a56!important}
+#dashboard .bg-emerald-900\/40{background:#e7f1e2!important}
+#dashboard .bg-amber-500\/10{background:#fff4d9!important}
+#dashboard .bg-rose-500\/20{background:#fbe8e4!important}
+#dashboard .bg-emerald-500\/20{background:#e4f3df!important}
+#dashboard .bg-slate-700.text-slate-300{background:#edf0e8!important}
+#dashboard .bg-slate-800\/60{background:#f1f4ec!important}
+#dashboard .text-slate-500{color:#788579!important}
+@media(max-width:640px){#home .relative.max-w-7xl{padding-top:48px;padding-bottom:54px}#home h1{font-size:3.2rem}#dashboard nav .max-w-7xl{align-items:flex-start;gap:12px;flex-direction:column}#dashboard nav .flex.gap-2{width:100%;overflow-x:auto;padding-bottom:3px}#dashboard nav .tab-btn{white-space:nowrap;padding:.6rem .8rem;font-size:12px}#features .glass{min-height:0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="atelier-paris-theme">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--ink:#202b22;--muted:#72776b;--paper:#f7f5ef;--card:#fffdf8;--line:#e5e0d4;--green:#314b36;--lime:#d7e6a4;--clay:#b66d4d;--soft:#eeeee3}
+body{background:var(--paper)!important;color:var(--ink)!important;font-family:'DM Sans',sans-serif!important;letter-spacing:0!important}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif!important;font-weight:600!important;letter-spacing:-.045em!important}
+p{line-height:1.75}
+::selection{background:#d7e6a4;color:#202b22}
+/* Editorial hierarchy: calm typography, tactile surfaces, restrained colour. */
+.bg-slate-950,.bg-slate-900,.bg-slate-900\/50,.bg-slate-900\/60,.bg-slate-900\/95,.bg-slate-800,.bg-slate-800\/60,.bg-slate-800\/50,.bg-slate-800\/40{background-color:var(--card)!important}
+.text-slate-100,.text-white{color:var(--ink)!important}
+.text-slate-300,.text-slate-400,.text-slate-500{color:var(--muted)!important}
+.border-slate-800,.border-slate-700,.border-slate-600{border-color:var(--line)!important}
+.bg-emerald-600,.bg-emerald-500,.bg-indigo-600,.bg-indigo-500,.bg-cyan-600,.bg-rose-600{background:var(--green)!important;color:#fff!important}
+.bg-gradient-to-r,.bg-gradient-to-br{background-image:none!important}
+.from-emerald-500,.from-cyan-600,.to-cyan-500,.to-emerald-600{background-color:var(--green)!important}
+.text-transparent.bg-clip-text{color:var(--green)!important;background:none!important;-webkit-text-fill-color:var(--green)!important}
+.glass{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:5px 22px 22px 22px!important;box-shadow:0 12px 34px rgba(39,49,34,.045)!important;backdrop-filter:none!important}
+.card-hover{transition:transform .28s ease,box-shadow .28s ease!important}
+.card-hover:hover{transform:translateY(-3px)!important;box-shadow:0 18px 38px rgba(39,49,34,.09)!important}
+button{font-family:'DM Sans',sans-serif!important;letter-spacing:.005em;transition:transform .2s ease,background .2s ease!important}
+button:hover{filter:none!important;transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #b66d4d!important;outline-offset:3px}
+button.bg-gradient-to-r,button.bg-emerald-600,button.bg-indigo-600{background:var(--green)!important;color:white!important;border:1px solid var(--green)!important;box-shadow:none!important;border-radius:999px!important}
+input,select{background:#fffdf8!important;color:var(--ink)!important;border:1px solid #dcd7ca!important;border-radius:8px!important;box-shadow:none!important}
+input:focus,select:focus{border-color:var(--green)!important}
+nav,header{background:rgba(247,245,239,.94)!important;border-color:var(--line)!important;backdrop-filter:blur(14px)!important}
+#home{background:var(--paper)!important}
+#home>.absolute{background:radial-gradient(ellipse at 86% 28%,rgba(215,230,164,.36),transparent 30%),linear-gradient(115deg,#f7f5ef 0%,#f1f0e7 100%)!important}
+#home .relative.max-w-7xl{padding-top:clamp(4rem,8vw,7rem)!important;padding-bottom:clamp(4rem,8vw,7rem)!important}
+#home h1{font-family:'Playfair Display',Georgia,serif!important;font-size:clamp(3.4rem,7.2vw,6.5rem)!important;line-height:.98!important;letter-spacing:-.065em!important;max-width:780px!important}
+#home p{color:#626b5e!important;max-width:640px;line-height:1.85!important}
+#home .inline-flex.rounded-full{background:#e9eddf!important;color:#405c3d!important;border:1px solid #dce3d0!important;border-radius:999px!important;letter-spacing:.045em;font-size:.72rem!important;text-transform:uppercase}
+#home .glass{transform:rotate(.7deg);border-radius:5px 28px 28px 28px!important;box-shadow:0 25px 65px rgba(39,49,34,.09)!important}
+#features{background:#eceee5!important}
+#features h2{font-family:'Playfair Display',Georgia,serif!important;font-size:clamp(2.3rem,4.4vw,3.8rem)!important;letter-spacing:-.05em!important}
+#features .glass{min-height:180px;padding:28px!important;border-radius:5px 20px 20px 20px!important}
+#features i{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#e8eddb;color:var(--green)!important;font-size:19px!important}
+#dashboard{background:var(--paper)!important}
+#dashboard h2{font-family:'Playfair Display',Georgia,serif!important}
+#dashboard .tab-content>.glass,#dashboard .tab-content .glass{box-shadow:0 8px 26px rgba(39,49,34,.04)!important}
+#drop-zone{background:#f1f1e8!important;border-color:#c9cebd!important;border-radius:16px!important}
+#drop-zone button{background:var(--green)!important;color:white!important}
+.tab-active{background:var(--green)!important;color:white!important}
+.severity-high{background:#f5e4dd!important;color:#9c4d37!important}.severity-med{background:#f6edcf!important;color:#89601b!important}.severity-low{background:#e7eddb!important;color:#45623c!important}
+#vision-result,#review-box{background:var(--card)!important}
+#dashboard .bg-slate-800\/50,#dashboard .bg-slate-800\/40{border:1px solid var(--line)!important}
+#dashboard .text-emerald-400,#dashboard .text-emerald-300{color:#45623c!important}
+#dashboard .text-cyan-400{color:#477b72!important}
+#dashboard .text-rose-400,#dashboard .text-rose-300{color:#a9533e!important}
+#dashboard .text-amber-400,#dashboard .text-amber-300{color:#946a23!important}
+#dashboard .text-indigo-400{color:#526c52!important}
+#dashboard .bg-emerald-900\/40{background:#e8eddf!important}
+#dashboard .bg-amber-500\/10{background:#f7efd9!important}
+#dashboard .bg-rose-500\/20{background:#f5e4dd!important}
+#dashboard .bg-emerald-500\/20{background:#e7eddb!important}
+#dashboard .bg-slate-700.text-slate-300{background:#eeeee5!important}
+#dashboard .bg-slate-800\/60{background:#f1f1e8!important}
+/* Agronomist review screen */
+header{padding:19px 24px!important}
+main{max-width:720px!important;padding:38px 22px!important}
+main>div{border-radius:5px 24px 24px 24px!important;box-shadow:0 12px 34px rgba(39,49,34,.06)!important}
+#popup>div{background:var(--card)!important;border-color:var(--line)!important;box-shadow:0 28px 90px rgba(30,38,27,.22)!important;border-radius:5px 24px 24px 24px!important}
+#popup .bg-slate-800\/60{background:#f0f0e7!important;border:1px solid var(--line)!important}
+#popup .bg-rose-600{background:var(--clay)!important}
+#p-body{line-height:1.65!important}
+@media(max-width:640px){#home .relative.max-w-7xl{padding-top:48px!important;padding-bottom:54px!important}#home h1{font-size:3.45rem!important}#dashboard nav .max-w-7xl{align-items:flex-start;gap:12px;flex-direction:column}#dashboard nav .flex.gap-2{width:100%;overflow-x:auto;padding-bottom:3px}#dashboard nav .tab-btn{white-space:nowrap;padding:.6rem .8rem;font-size:12px}#features .glass{min-height:0}main{padding:24px 14px!important}#popup>div{border-radius:24px 24px 0 0!important;padding:20px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="bold-art-direction">
+/* High-impact art direction: vivid botanical colour, editorial contrast, tactile UI */
+:root{--ink:#17271d;--muted:#657267;--paper:#f5f3e9;--card:#fffef9;--line:#dcded0;--green:#1e5637;--lime:#d9ff62;--clay:#d36b4b;--soft:#e7eddb}
+body{background-color:var(--paper)!important;background-image:radial-gradient(ellipse at 8% 6%,rgba(217,255,98,.20),transparent 28%),radial-gradient(ellipse at 94% 30%,rgba(211,107,75,.07),transparent 24%)!important}
+/* Crisp contrast and richer surface details */
+.glass{border:1px solid rgba(49,75,54,.13)!important;box-shadow:0 14px 36px rgba(28,54,34,.07)!important;position:relative;overflow:hidden}
+.glass:after{content:"";position:absolute;inset:0 auto auto 0;width:58px;height:4px;background:var(--lime);opacity:.95}
+.card-hover:hover{box-shadow:0 24px 50px rgba(28,54,34,.13)!important;transform:translateY(-6px) scale(1.008)!important}
+#home{overflow:hidden!important;isolation:isolate}
+#home>.absolute{background:radial-gradient(ellipse at 83% 24%,rgba(217,255,98,.48),transparent 28%),radial-gradient(ellipse at 70% 80%,rgba(211,107,75,.12),transparent 27%),linear-gradient(125deg,#f7f5ec 0%,#edf0e2 55%,#e4ebd7 100%)!important}
+#home:before{content:"";position:absolute;z-index:-1;right:-7vw;top:7%;width:clamp(250px,37vw,560px);aspect-ratio:1;border:1px solid rgba(30,86,55,.14);border-radius:50%;box-shadow:0 0 0 28px rgba(30,86,55,.025),0 0 0 58px rgba(30,86,55,.025),0 0 0 92px rgba(30,86,55,.02);pointer-events:none}
+#home h1{font-size:clamp(3.5rem,7.5vw,7rem)!important;line-height:.91!important;letter-spacing:-.075em!important;max-width:850px!important;text-wrap:balance}
+#home h1 em,#home h1 .accent{color:var(--green)!important;font-style:normal;text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:.12em;text-underline-offset:.08em}
+#home .inline-flex.rounded-full{background:var(--lime)!important;color:#1b3825!important;border:1px solid #c6ed48!important;font-weight:700!important;box-shadow:0 5px 0 rgba(30,86,55,.06);letter-spacing:.08em!important}
+#home .glass{transform:rotate(1.1deg);border-radius:8px 30px 8px 30px!important;box-shadow:0 30px 80px rgba(30,65,39,.15)!important;border:1px solid rgba(255,255,255,.9)!important}
+#home .glass:after{height:6px;width:90px;background:var(--clay)}
+#home .glass .rounded-xl,#home .glass .rounded-2xl{border-radius:14px!important}
+#features{background:#e6ebdc!important;position:relative;overflow:hidden}
+#features:before{content:"FIELD NOTES / 01";display:block;max-width:1200px;margin:0 auto;padding:28px 24px 0;font-size:10px;letter-spacing:.22em;font-weight:700;color:#71806b}
+#features .glass{background:#fffef9!important;border-radius:7px 22px 7px 22px!important;transition:transform .3s,box-shadow .3s!important}
+#features .glass:nth-of-type(2n){background:#f2f5e8!important}
+#features i{background:var(--lime)!important;color:#244a31!important;border-radius:14px!important;box-shadow:4px 4px 0 rgba(30,86,55,.09)}
+button.bg-gradient-to-r,button.bg-emerald-600,button.bg-indigo-600,button.bg-cyan-600{background:var(--green)!important;border-color:var(--green)!important;color:#fff!important;border-radius:999px!important;box-shadow:0 5px 0 rgba(15,54,32,.14)!important;font-weight:700!important}
+button.bg-gradient-to-r:hover,button.bg-emerald-600:hover,button.bg-indigo-600:hover{background:#2b7048!important;box-shadow:0 8px 0 rgba(15,54,32,.12)!important;transform:translateY(-2px)!important}
+button.bg-rose-600{background:var(--clay)!important;border-color:var(--clay)!important;color:white!important}
+input,select{box-shadow:inset 0 1px 2px rgba(20,40,20,.025)!important}
+input:focus,select:focus{box-shadow:0 0 0 4px rgba(217,255,98,.35)!important;border-color:#71914a!important}
+#dashboard{background-image:linear-gradient(180deg,rgba(230,235,220,.6),transparent 240px)!important}
+#dashboard .tab-btn{border-radius:999px!important;transition:all .2s ease!important}
+#dashboard .tab-active{background:var(--lime)!important;color:#193a26!important;box-shadow:inset 0 0 0 1px #c6ed48!important}
+#dashboard .tab-content .glass{border-radius:8px 22px 8px 22px!important}
+#drop-zone{border:1.5px dashed #9aa98c!important;background:linear-gradient(135deg,#f5f6ed,#eaf0df)!important}
+#drop-zone:hover{border-color:var(--green)!important;background:#e8f0dc!important}
+.severity-high{background:#f9e1d8!important;color:#9c402c!important}.severity-med{background:#fff0bf!important;color:#7d570b!important}.severity-low{background:#dff2bd!important;color:#315b2d!important}
+header{box-shadow:0 1px 0 rgba(36,60,39,.06)!important}
+/* Agronomist console gets a stronger, confident decision-making hierarchy */
+body>header{border-bottom:3px solid var(--lime)!important}
+body>header .font-bold{font-family:'Playfair Display',Georgia,serif!important;font-size:1.45rem!important;letter-spacing:-.04em!important}
+body>header .text-emerald-400{color:#4c7c3c!important}
+main>div{border-radius:8px 26px 8px 26px!important;border-color:var(--line)!important;background:var(--card)!important;box-shadow:0 18px 48px rgba(28,54,34,.08)!important}
+#popup>div{border-top:5px solid var(--lime)!important}
+#popup .grid button{min-height:56px!important}
+@media(max-width:640px){#home h1{font-size:clamp(3.15rem,15vw,4.6rem)!important}#home:before{right:-45%;top:2%;opacity:.65}#home .glass{transform:none!important}#features:before{padding-left:20px}main{padding:22px 14px!important}}
+@media(prefers-reduced-motion:reduce){.card-hover:hover,button:hover{transform:none!important}}
+</style>
+
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+<!-- ========== HOMEPAGE / HERO ========== -->
+<section id="home" class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-slate-950 to-cyan-900/30"></div>
+  <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-medium mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+          Hackathon Prototype • ESP32 + CV + QpiAI-Opt Ready
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+          AgriGuard <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">AI</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl">
+          Real-time sensor fusion + computer vision disease detection + location-aware soil & weather intelligence + 
+          optimized pesticide/fertilizer delivery under 60 minutes + agronomist confirmation powered by QpiAI-Opt.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button onclick="showDashboard()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 font-semibold text-lg shadow-lg shadow-emerald-500/30 hover:scale-105 transition">
+            Open Live Dashboard
+          </button>
+          <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" class="px-8 py-4 rounded-xl border border-slate-600 hover:bg-slate-800 transition">
+            See Features
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 relative">
+        <div class="glass rounded-3xl p-6 shadow-2xl">
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="bg-slate-800/60 rounded-xl p-4">
+              <div class="text-slate-400 mb-1">Soil Moisture</div>
+              <div class="text-2xl font-bold text-cyan-400" id="hero-soil">42%</div>
+            </div>
+            <div class="bg-slate-800/60 rounded-xl p-4">
+              <div class="text-slate-400 mb-1">Air Humidity</div>
+              <div class="text-2xl font-bold text-emerald-400" id="hero-hum">68%</div>
+            </div>
+            <div class="bg-slate-800/60 rounded-xl p-4">
+              <div class="text-slate-400 mb-1">Rain Detected</div>
+              <div class="text-2xl font-bold text-blue-400" id="hero-rain">No</div>
+            </div>
+            <div class="bg-slate-800/60 rounded-xl p-4">
+              <div class="text-slate-400 mb-1">Disease Risk</div>
+              <div class="text-2xl font-bold text-amber-400">Medium</div>
+            </div>
+          </div>
+          <div class="mt-4 text-xs text-slate-500 text-center"><span id="hero-src">Demo mode (simulated)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features strip -->
+<section id="features" class="py-16 bg-slate-900/50">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Complete Intelligent Pipeline</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-microchip text-3xl text-emerald-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">ESP32 Sensor Hub</h3>
+        <p class="text-slate-400 text-sm">DHT (temp/humidity) + Soil Moisture V2.0 + Rain droplet → real-time classification (High/Med/Low)</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-camera text-3xl text-cyan-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Computer Vision</h3>
+        <p class="text-slate-400 text-sm">Crop image → infected region detection → disease identification (PlantVillage style)</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-map-marker-alt text-3xl text-amber-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Location Intelligence</h3>
+        <p class="text-slate-400 text-sm">GPS → village → UPAg soil health + past crop data + 15-day weather + nearby agronomists</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-flask text-3xl text-purple-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Smart Recommendation</h3>
+        <p class="text-slate-400 text-sm">Disease + sensors → exact pesticide/fertilizer, method (spray/inject), site-specific dosage</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-truck text-3xl text-rose-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">60-min Delivery + Opt</h3>
+        <p class="text-slate-400 text-sm">Treatment product delivery + agronomist-approved quantities</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-user-md text-3xl text-indigo-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Agronomist Loop (QpiAI-Opt)</h3>
+        <p class="text-slate-400 text-sm">Confirm / reject recommendation → schedule visit by experience + availability + damage priority (QpiAI-Opt style)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DASHBOARD ========== -->
+<section id="dashboard" class="hidden min-h-screen">
+  <nav class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button onclick="showHome()" class="text-slate-400 hover:text-white"><i class="fas fa-arrow-left"></i></button>
+        <span class="font-bold text-lg">AgriGuard Dashboard</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300" id="loc-badge">Detecting location...</span>
+      </div>
+      <div class="flex gap-2 text-sm">
+        <button onclick="switchTab('sensors')" class="tab-btn px-4 py-2 rounded-lg tab-active" data-tab="sensors">Sensors &amp; Vision</button>
+        <button onclick="switchTab('calculation')" class="tab-btn px-4 py-2 rounded-lg" data-tab="calculation" id="calculation-btn">Calculation</button>
+        <button onclick="switchTab('analysis')" class="tab-btn px-4 py-2 rounded-lg" data-tab="analysis">Analysis &amp; Review</button>
+        <button onclick="switchTab('delivery')" class="tab-btn px-4 py-2 rounded-lg" data-tab="delivery" id="delivery-btn">Delivery</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- SENSORS TAB -->
+    <div id="tab-sensors" class="tab-content">
+      <div class="flex flex-wrap gap-3 items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Live Hardware Readings</h2>
+        <div class="flex flex-wrap items-center gap-2 text-sm">
+          <span id="link-pill" class="text-xs px-3 py-1 rounded-full bg-slate-700 text-slate-300">Demo mode (simulated)</span>
+          <input id="esp-ip" class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 w-40" placeholder="192.168.4.1" />
+          <button onclick="connectESP32()" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500"><i class="fas fa-wifi mr-2"></i>Connect ESP32</button>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-8">
+        <div class="glass rounded-2xl p-5">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-slate-400 text-sm">Soil Moisture</div>
+              <div class="text-3xl font-bold mt-1" id="soil-val">--</div>
+              <div class="text-xs mt-2" id="soil-status">--</div>
+            </div>
+            <i class="fas fa-seedling text-2xl text-cyan-400"></i>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-slate-400 text-sm">Air Humidity</div>
+              <div class="text-3xl font-bold mt-1" id="hum-val">--</div>
+              <div class="text-xs mt-2" id="hum-status">--</div>
+            </div>
+            <i class="fas fa-water text-2xl text-blue-400"></i>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-slate-400 text-sm">Temperature</div>
+              <div class="text-3xl font-bold mt-1" id="temp-val">--</div>
+              <div class="text-xs mt-2" id="temp-status">--</div>
+            </div>
+            <i class="fas fa-thermometer-half text-2xl text-orange-400"></i>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-slate-400 text-sm">Rain Droplet</div>
+              <div class="text-3xl font-bold mt-1" id="rain-val">--</div>
+              <div class="text-xs mt-2" id="rain-status">--</div>
+            </div>
+            <i class="fas fa-cloud-rain text-2xl text-indigo-400"></i>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-5 relative overflow-hidden">
+          <div class="absolute -right-5 -top-5 w-20 h-20 rounded-full bg-lime-200/40 blur-xl pointer-events-none"></div>
+          <div class="flex justify-between items-start gap-2 relative">
+            <div class="min-w-0">
+              <div class="text-slate-500 text-sm">LDR Light Sensor</div>
+              <div class="text-3xl font-bold mt-1" id="ldr-val">--</div>
+              <div class="text-xs mt-2" id="ldr-status">Waiting for sensor data</div>
+              <div class="text-xs mt-3 text-slate-500">ADC raw: <span id="ldr-raw" class="font-semibold">--</span></div>
+              <div class="mt-3 h-1.5 rounded-full bg-slate-200 overflow-hidden"><div id="ldr-meter" class="h-full rounded-full transition-all duration-500" style="width:0%"></div></div>
+            </div>
+            <i class="fas fa-sun text-2xl text-amber-500"></i>
+          </div>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <h3 class="font-semibold mb-3">Sensor Threshold Logic</h3>
+        <div class="text-sm text-slate-400 space-y-1">
+          <p>• Soil Moisture: Low &lt;30% | Moderate 30-60% | High &gt;60%</p>
+          <p>• Air Humidity: Low &lt;40% | Moderate 40-70% | High &gt;70%</p>
+          <p>• Temperature: Optimal 18-32°C for most crops</p>
+          <p>• Rain: Binary (wet/dry) from droplet sensor</p>
+          <p>• LDR: Shows the raw ESP32 ADC reading (typically 0–4095) and a relative ADC-scale percentage. This is not a calibrated lux measurement; whether the value rises in brighter light depends on your voltage-divider wiring.</p>
+        </div>
+      </div>
+
+      <!-- CROP PHOTO (bottom half) -->
+      <div class="mt-10">
+      <h2 class="text-2xl font-bold mb-6 pt-8 border-t border-slate-800">Computer Vision Disease Detection</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass rounded-2xl p-6">
+          <h3 class="font-semibold mb-4">Capture / Upload Crop Image</h3>
+          <label for="crop-select" class="block text-sm mb-2">Choose your crop</label>
+          <select id="crop-select" class="w-full p-3 mb-4 border rounded-lg">
+            <option value="wheat">wheat</option><option value="rice">rice</option><option value="tomato">tomato</option><option value="Kalanchoe pinata" selected>Kalanchoe pinata</option><option value="spinach">spinach</option><option value="suargcane">suargcane</option><option value="lemon">lemon</option>
+          </select>
+          <div class="border-2 border-dashed border-slate-600 rounded-xl h-64 flex flex-col items-center justify-center mb-4 bg-slate-900/50" id="drop-zone">
+            <i class="fas fa-camera text-4xl text-slate-500 mb-3"></i>
+            <p class="text-slate-400 text-sm mb-3">Drag image or click to upload</p>
+            <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImage(event)" />
+            <button onclick="document.getElementById('image-input').click()" class="px-4 py-2 bg-slate-700 rounded-lg text-sm">Choose Image</button>
+          </div>
+          <div id="preview-container" class="hidden">
+            <img id="preview-img" class="rounded-xl max-h-64 mx-auto mb-3" />
+            <p class="text-xs text-slate-500 text-center">After upload, the page calculates the affected area and treatment quantities before you submit the plan for agronomist review.</p>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6" id="vision-result">
+          <h3 class="font-semibold mb-4">Detection Result</h3>
+          <p class="text-slate-400 text-sm">Upload an image and run analysis to see infected region, disease name, confidence and recommended action.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- ANALYSIS TAB -->
+    <div id="tab-analysis" class="tab-content hidden">
+      <h2 class="text-2xl font-bold mb-6">Analysis & Review — Agronomist Approval</h2>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="glass rounded-2xl p-5">
+          <div class="text-slate-400 text-sm mb-1">Detected Disease</div>
+          <div class="text-xl font-bold" id="dis-name">Awaiting image analysis</div>
+          <div class="text-xs text-amber-400 mt-1" id="dis-conf">Confidence: —</div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="text-slate-400 text-sm mb-1">Infected Part</div>
+          <div class="text-xl font-bold" id="dis-part">—</div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="text-slate-400 text-sm mb-1">Severity / Damage</div>
+          <div class="text-xl font-bold text-rose-400" id="dis-sev">—</div>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-6 mb-6">
+        <h3 class="font-semibold mb-4">Recommended Intervention</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <div class="text-sm text-slate-400 mb-1">Pesticide</div>
+            <div class="font-medium" id="rec-pest">Shown after the disease is detected</div>
+            <div class="text-sm text-slate-400 mt-3 mb-1">Application Method</div>
+            <div class="font-medium" id="rec-method">—</div>
+            <div class="text-sm text-slate-400 mt-3 mb-1">Fertilizer Support</div>
+            <div class="font-medium" id="rec-fert">Shown after the disease is detected</div>
+          </div>
+          <div>
+            <div class="text-sm text-slate-400 mb-1">Dosage Calculation Inputs</div>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span>Farm Area</span><span id="area-val">—</span></div>
+              <div class="flex justify-between"><span>Affected Area</span><span id="aff-val">—</span></div>
+              <div id="review-doses" class="space-y-2"></div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3">Calculated via past land history + current severity (QpiAI Cloud style forecasting ready)</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="review-box" class="glass rounded-2xl p-6">
+        <h3 class="font-semibold mb-2"><i class="fas fa-user-md mr-2 text-indigo-400"></i>Agronomist Review</h3>
+        <p id="review-msg" class="text-sm text-slate-400">Run the crop analysis (Sensors &amp; Vision tab). It is sent to the agronomist automatically, and Delivery unlocks only after approval.</p>
+      </div>
+      <div id="schedule-box" class="hidden mt-6">
+        <div class="glass rounded-2xl p-6 mb-6">
+          <h3 class="font-semibold mb-1">Book a Visit — nearest available agronomists (50 km)</h3>
+          <p class="text-xs text-slate-400 mb-4">Ranked by relevant experience, availability and damage priority</p>
+          <div id="agro-list" class="space-y-3"></div>
+        </div>
+        <div class="glass rounded-2xl p-6"><div id="booking-result" class="text-sm text-slate-400">Pick an agronomist and a time slot.</div></div>
+      </div>
+    </div>
+
+    <!-- CALCULATION TAB: acreage-based treatment quantity planner -->
+    <div id="tab-calculation" class="tab-content hidden space-y-6">
+      <div class="glass rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+        <span id="calc-crop-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-lime-100 text-emerald-900 border border-lime-300">Crop: awaiting detection</span>
+        <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 mt-3">Affected Area &amp; Treatment Calculation</h2>
+        <p class="text-sm text-slate-600 mt-2">Enter only the total farm acreage and the infected acreage. Quantities below are calculated from the rates you provided, using infected acreage—not the entire farm.</p>
+        <div class="grid md:grid-cols-2 gap-5 mt-6">
+          <label class="block text-sm font-semibold text-slate-700">Total farm area (acres)
+            <input id="farm-acres" type="number" min="0.01" step="0.01" placeholder="Enter total acres" class="mt-2 w-full border-2 border-slate-300 rounded-xl p-3 text-xl" oninput="calculateDose()">
+          </label>
+          <label class="block text-sm font-semibold text-slate-700">Infected area (acres)
+            <input id="infected-acres" type="number" min="0" step="0.01" placeholder="Enter infected acres" class="mt-2 w-full border-2 border-slate-300 rounded-xl p-3 text-xl" oninput="calculateDose()">
+          </label>
+        </div>
+        <div id="area-summary" class="mt-5 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900">Enter both acreage values to calculate the treatment quantities.</div>
+      </div>
+      <div id="dose-results" class="grid md:grid-cols-2 gap-4"></div>
+      <div class="glass rounded-2xl p-6 border border-emerald-200">
+        <h3 class="text-lg font-bold mb-2">Next step: Agronomist verification</h3>
+        <p class="text-sm text-slate-600 mb-4">Review the detected condition and calculated quantities. Submit the plan for agronomist approval before delivery or application.</p>
+        <button type="button" onclick="submitCalculationForReview()" class="px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold"><i class="fas fa-user-check mr-2"></i>Submit Calculation for Agronomist Review</button>
+      </div>
+    </div>
+
+    <!-- DELIVERY TAB -->
+    <div id="tab-delivery" class="tab-content hidden">
+      <h2 class="text-2xl font-bold mb-2">Optimized Delivery & Pack Selection</h2>
+      <p class="text-slate-400 text-sm mb-6">QpiAI-Opt style: lowest cost + least over-application + multi-farmer priority + stock awareness</p>
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="glass rounded-2xl p-5">
+          <h3 class="font-semibold mb-3">Nearest Dealers (Stock Aware)</h3>
+          <div id="dealer-list" class="space-y-3"></div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <h3 class="font-semibold mb-3">Multi-Farmer Priority Queue</h3>
+          <p class="text-xs text-slate-400 mb-3">Priority = f(damage extent, distance, delivery time). Highest damage first.</p>
+          <div id="priority-list" class="space-y-2 text-sm"></div>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-6">
+        <h3 class="font-semibold mb-4">Place Order</h3>
+        <div class="flex flex-wrap gap-4 items-end">
+          <div>
+            <label class="text-xs text-slate-400">Payment</label>
+            <select id="pay-method" class="block mt-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2">
+              <option>UPI</option>
+              <option>Cash on Delivery</option>
+            </select>
+          </div>
+          <button onclick="placeOrder()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 font-semibold">
+            Confirm Order • Deliver under 60 min
+          </button>
+        </div>
+        <div id="order-status" class="mt-4 hidden text-emerald-400 font-medium"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features strip -->
+<section id="features" class="py-16 bg-slate-900/50">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Complete Intelligent Pipeline</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-microchip text-3xl text-emerald-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">ESP32 Sensor Hub</h3>
+        <p class="text-slate-400 text-sm">DHT (temp/humidity) + Soil Moisture V2.0 + Rain droplet → real-time classification (High/Med/Low)</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-camera text-3xl text-cyan-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Computer Vision</h3>
+        <p class="text-slate-400 text-sm">Crop image → infected region detection → disease identification (PlantVillage style)</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-map-marker-alt text-3xl text-amber-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Location Intelligence</h3>
+        <p class="text-slate-400 text-sm">GPS → village → UPAg soil health + past crop data + 15-day weather + nearby agronomists</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-flask text-3xl text-purple-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Smart Recommendation</h3>
+        <p class="text-slate-400 text-sm">Disease + sensors → exact pesticide/fertilizer, method (spray/inject), site-specific dosage</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-truck text-3xl text-rose-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">60-min Delivery + Opt</h3>
+        <p class="text-slate-400 text-sm">Treatment product delivery + agronomist-approved quantities</p>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <i class="fas fa-user-md text-3xl text-indigo-400 mb-4"></i>
+        <h3 class="font-bold text-lg mb-2">Agronomist Loop (QpiAI-Opt)</h3>
+        <p class="text-slate-400 text-sm">Confirm / reject recommendation → schedule visit by experience + availability + damage priority (QpiAI-Opt style)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===================== BACKEND CONFIG — EDIT THIS WHEN YOUR TRAINED MODEL API IS READY =====================
+// The page uploads the leaf image to BACKEND.url and reads the predicted class name from the JSON reply.
+// Works with typical FastAPI / Flask responses such as {"class":"Sheath_Blight","confidence":0.97},
+// {"prediction":"..."}, {"label":"..."}, {"predicted_class":"..."}, or a list of top predictions.
+const BACKEND = {
+  url: 'http://localhost:8000/predict', // <-- your trained model's prediction endpoint
+  mode: 'multipart',                    // 'multipart' = file upload  |  'json' = {image: <base64>, crop: <name>}
+  fileField: 'file',                    // form-field name your backend expects for the image (multipart mode)
+  cropField: 'crop',                    // selected crop is also sent under this field name
+  classOrder: [],                       // ONLY if the backend returns a class index / probability array: list class names in training order
+  timeoutMs: 30000
+};
+
+// ===================== TREATMENT DATABASE (class names match the trained backend dataset) =====================
+// P(name, perAcreLow, unit, perAcreHigh?, customRateText?)  → quantity = rate × INFECTED acres
+const P = (name, lo, unit, hi, rate) => ({ name, lo, hi: hi ?? lo, unit,
+  rate: rate || ((hi != null && hi !== lo) ? `${lo}–${hi} ${unit} per acre` : `${lo} ${unit} per acre`) });
+
+const KAL_PEST = [P('Hexaconazole 5% EC', 200, 'ml', 300), P('Cymoxanil 8% + Mancozeb 64% WP', 600, 'g')];
+const KAL_FERT = [P('Chelated Micronutrient Mix (Iron, Zinc, Manganese)', 0.5, 'kg', 1, '500 g–1 kg per acre'), P('Epsom Salt (Magnesium Sulfate)', 2, 'kg', 3)];
+
+const TREATMENTS = {
+  rice: { label: 'rice', aliases: ['rice'], diseases: {
+    'Bacterial leaf blight': { pest: [P('Streptocycline', 40, 'g'), P('Copper Oxychloride 50% WP', 500, 'g')],
+                               fert: [P('Zinc Sulfate 21%', 15, 'kg'), P('Muriate of Potash', 25, 'kg')] },
+    'Sheath_Blight':         { pest: [P('Hexaconazole 5% EC', 200, 'ml'), P('Validamycin 3% L', 800, 'ml')],
+                               fert: [P('Gypsum', 100, 'kg'), P('Urea', 40, 'kg')] },
+    'Narrow_Brown_Spot':     { pest: [P('Propiconazole 25% EC', 200, 'ml'), P('Carbendazim 50% WP', 250, 'g')],
+                               fert: [P('Soluble Silicon', 4, 'kg'), P('NPK 13:0:45', 2.5, 'kg')] }
+  }},
+  wheat: { label: 'wheat', aliases: ['wheat'], diseases: {
+    'YellowRust': { pest: [P('Propiconazole 25% EC', 200, 'ml'), P('Tebuconazole 250 EC', 200, 'ml')],
+                    fert: [P('Muriate of Potash', 20, 'kg'), P('Single Super Phosphate', 50, 'kg')] },
+    'Septoria':   { pest: [P('Azoxystrobin 18.2% + Difenoconazole 11.4% SC', 200, 'ml'), P('Epoxiconazole 7.5% + Carbendazim 25% SC', 300, 'ml')],
+                    fert: [P('Zinc Sulfate 33%', 10, 'kg'), P('Urea', 45, 'kg')] },
+    'Mildew':     { pest: [P('Wettable Sulfur 80% WP', 1, 'kg'), P('Propiconazole 25% EC', 200, 'ml')],
+                    fert: [P('Di-Ammonium Phosphate', 50, 'kg'), P('Ferrous Sulfate', 10, 'kg')] }
+  }},
+  tomato: { label: 'tomato', aliases: ['tomato'], diseases: {
+    'Tomato__Late_blight': { pest: [P('Mancozeb 75% WP', 600, 'g', 800), P('Metalaxyl 8% + Mancozeb 64% WP', 600, 'g')],
+                             fert: [P('Calcium Nitrate', 5, 'kg'), P('Boron 20%', 250, 'g')] },
+    'Tomato__Tomato_Yellow_Leaf_Curl_Virus': { vector: true, pest: [P('Imidacloprid 17.8% SL', 100, 'ml'), P('Acetamiprid 20% SP', 80, 'g')],
+                             fert: [P('Epsom Salt', 3, 'kg'), P('NPK 0:52:34', 4, 'kg')] },
+    'Tomato__Bacterial_spot': { pest: [P('Copper Hydroxide 53.8% DF', 400, 'g'), P('Streptocycline', 40, 'g')],
+                             fert: [P('Chelated Micronutrient Mix', 500, 'g'), P('Liquid Humic Acid', 500, 'ml')] }
+  }},
+  suargcane: { label: 'suargcane', aliases: ['suargcane', 'sugarcane'], diseases: {
+    'smut':         { soak: true, pest: [P('Carbendazim 50% WP (sett-soak)', 100, 'L water', null, '100 L water per acre (sett-soak)'), P('Propiconazole 25% EC', 200, 'ml')],
+                      fert: [P('Di-Ammonium Phosphate', 75, 'kg'), P('Urea', 100, 'kg')] },
+    'BrownRust':    { pest: [P('Mancozeb 75% WP', 600, 'g'), P('Tebuconazole 50% + Trifloxystrobin 25% WG', 120, 'g')],
+                      fert: [P('Muriate of Potash', 40, 'kg'), P('Granular Sulphur 90%', 10, 'kg')] },
+    'Grassy shoot': { vector: true, pest: [P('Dimethoate 30% EC', 400, 'ml'), P('Malathion 50% EC', 400, 'ml')],
+                      fert: [P('Ferrous Sulfate', 20, 'kg'), P('Zinc Sulfate 33%', 15, 'kg')] }
+  }},
+  spinach: { label: 'spinach', aliases: ['spinach'], diseases: {
+    'Downy-Mildew':  { pest: [P('Copper Oxychloride 50% WP', 400, 'g'), P('Cymoxanil 8% + Mancozeb 64% WP', 400, 'g')],
+                       fert: [P('Ammonium Sulfate', 30, 'kg'), P('Farmyard Manure', 5, 'tonnes')] },
+    'Anthracnose':   { pest: [P('Carbendazim 50% WP', 200, 'g'), P('Chlorothalonil 75% WP', 400, 'g')],
+                       fert: [P('NPK 19:19:19', 2, 'kg'), P('Liquid Seaweed Extract', 500, 'ml')] },
+    'Bacterial-Spot': { pest: [P('Copper Hydroxide 53.8% DF', 300, 'g'), P('Kasugamycin 3% SL', 400, 'ml')],
+                       fert: [P('Vermicompost', 500, 'kg'), P('Potassium Sulfate NPK 0:0:50', 2, 'kg')] }
+  }},
+  lemon: { label: 'lemon', aliases: ['lemon'], diseases: {
+    'Citrus_Canker':    { pest: [P('Streptocycline', 40, 'g'), P('Copper Oxychloride 50% WP', 600, 'g')],
+                          fert: [P('Neem Cake', 150, 'kg'), P('NPK 10:26:26', 1, 'kg', null, '1 kg per acre per year')] },
+    'Algal_Leaf_Spot':  { pest: [P('Copper Oxychloride 50% WP', 500, 'g'), P('Bordeaux Mixture 1%', 200, 'L')],
+                          fert: [P('Manganese Sulfate', 2000, 'g'), P('Urea', 2500, 'g')] },
+    'Citrus_Scab':      { pest: [P('Carbendazim 50% WP', 250, 'g'), P('Azoxystrobin 23% SC', 200, 'ml')],
+                          fert: [P('Borax', 500, 'g'), P('Zinc Sulphate', 2000, 'g')] }
+  }},
+  kalanchoe: { label: 'Kalanchoe pinata', aliases: ['kalanchoe', 'kalanchoepinata', 'kalanchoepinnata'], diseases: {
+    'Kalanchoe_Web_Blight':    { kal: true, pest: KAL_PEST, fert: KAL_FERT },
+    'Kalanchoe_Yellow_Blight': { kal: true, pest: KAL_PEST, fert: KAL_FERT }
+  }}
+};
+
+// ---- class-name matching: tolerant of case, spaces, underscores, hyphens and optional "crop___" prefixes ----
+const normKey = s => String(s == null ? '' : s).toLowerCase().replace(/[^a-z0-9]/g, '');
+const TREAT_RECORDS = [], TREAT_EXACT = {};
+Object.entries(TREATMENTS).forEach(([cropKey, c]) => {
+  const aliases = [...new Set([cropKey, ...c.aliases.map(normKey)])];
+  Object.entries(c.diseases).forEach(([disease, d]) => {
+    const rec = { cropKey, cropLabel: c.label, disease, d, nd: normKey(disease) };
+    TREAT_RECORDS.push(rec);
+    [rec.nd, ...aliases.map(a => a + rec.nd)].forEach(k => { if (!TREAT_EXACT[k]) TREAT_EXACT[k] = rec; });
+  });
+});
+function findTreatment(label, cropHint) {
+  const n = normKey(label);
+  if (!n) return null;
+  if (TREAT_EXACT[n]) return TREAT_EXACT[n];
+  // fuzzy fallback: the label contains a known class name (or vice-versa)
+  let best = [], bestLen = 0;
+  TREAT_RECORDS.forEach(r => {
+    const len = n.includes(r.nd) ? r.nd.length : (n.length >= 5 && r.nd.includes(n) ? n.length : 0);
+    if (!len) return;
+    if (len > bestLen) { best = [r]; bestLen = len; } else if (len === bestLen) best.push(r);
+  });
+  if (best.length > 1 && cropHint) best = best.filter(r => r.cropKey === normKey(cropHint) || TREATMENTS[r.cropKey].aliases.map(normKey).includes(normKey(cropHint)));
+  return best.length === 1 ? best[0] : null;
+}
+const DEFAULT_REC = TREAT_EXACT[normKey('Kalanchoe_Web_Blight')];
+
+function fmtQty(lo, hi, unit) {
+  let u = unit, k = 1;
+  if (hi >= 1000 && unit === 'g') { u = 'kg'; k = 1 / 1000; }
+  else if (hi >= 1000 && unit === 'ml') { u = 'L'; k = 1 / 1000; }
+  const a = (lo * k).toFixed(2), b = (hi * k).toFixed(2);
+  return lo === hi ? `${a} ${u}` : `${a}–${b} ${u}`;
+}
+const escHtml = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+// ===================== STATE & MOCK DATA =====================
+const state = {
+  location: null,
+  village: "Rampur (Demo Village)",
+  sensors: { soil: 42, humidity: 68, temp: 29.4, rain: false, ldrRaw: 1850, ldrPct: null },
+  disease: {
+    name: "Early Blight (Alternaria solani)",
+    part: "Lamina of the leaf",
+    severity: "High",
+    confidence: 91,
+    affectedPct: 38
+  },
+  areaAcres: 2.5,
+  crop: 'Wheat',
+  nReq: 28, pReq: 18, kReq: 32
+};
+
+const dealers = [
+  { id:1, name:"Krishi Seva Kendra", dist:1.8, time:22, stock:{mancozeb:45}, rating:4.6 },
+  { id:2, name:"GreenField Agro", dist:3.4, time:35, stock:{mancozeb:8}, rating:4.4 },
+  { id:3, name:"Village Agri Mart", dist:5.1, time:48, stock:{mancozeb:0}, rating:4.2 },
+  { id:4, name:"Next Village Dealers", dist:9.2, time:55, stock:{mancozeb:60}, rating:4.5 }
+];
+
+const agronomists = [
+  { id:1, name:"Dr. Anil Sharma", exp:14, specialty:"Fungal diseases / Tomato", slots:["Tomorrow 09:00","Tomorrow 14:30","Fri 10:00"], dist:12 },
+  { id:2, name:"Dr. Priya Verma", exp:9, specialty:"Integrated Pest Mgmt", slots:["Today 16:00","Tomorrow 11:00"], dist:8 },
+  { id:3, name:"Dr. Rakesh Yadav", exp:18, specialty:"Soil health + Blight", slots:["Fri 09:30","Sat 10:00"], dist:22 }
+];
+
+const farmersQueue = [
+  { name:"You (Current)", damage:38, dist:1.8, time:22 },
+  { name:"Suresh (same village)", damage:55, dist:0.9, time:18 },
+  { name:"Meena (same village)", damage:22, dist:2.1, time:25 },
+  { name:"Raju (nearby)", damage:41, dist:4.5, time:40 }
+];
+
+// ===================== UI HELPERS =====================
+function showDashboard() {
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('features').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+  refreshSensors();
+  getLocation();
+  renderDealers();
+  renderPriority();
+  calculateDose();
+}
+
+function showHome() {
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+  document.getElementById('features').classList.remove('hidden');
+}
+
+function switchTab(tab) {
+  if (tab === 'delivery' && !state.deliveryReady) { toast('Delivery unlocks after agronomist approval'); return; }
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.getElementById('tab-' + tab).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('tab-active');
+    if (btn.dataset.tab === tab) btn.classList.add('tab-active');
+  });
+  if (tab === 'calculation') calculateDose();
+}
+
+// ===================== SENSORS =====================
+// ===================== ESP32 LIVE LINK =====================
+const link = { mode: 'demo', ip: '192.168.4.1', fails: 0 };
+try { link.ip = localStorage.getItem('esp_ip') || link.ip; } catch (e) {}
+document.getElementById('esp-ip').value = link.ip;
+
+function setLink(text, cls) {
+  const p = document.getElementById('link-pill');
+  p.textContent = text;
+  p.className = 'text-xs px-3 py-1 rounded-full ' + cls;
+  document.getElementById('hero-src').textContent = text;
+}
+
+async function pollESP32() {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 2500);
+  try {
+    const r = await fetch(`http://${link.ip}/data`, { signal: ctl.signal, cache: 'no-store' });
+    const d = await r.json();
+    clearTimeout(t);
+    link.fails = 0;
+    ['soil', 'humidity', 'temp', 'rain', 'soilRaw', 'rainRaw', 'ldrRaw', 'ldr', 'ldrPct', 'light', 'lightPct'].forEach(k => { if (d[k] != null) state.sensors[k] = d[k]; });
+    // Accept common firmware field names. Prefer an explicit raw ADC field when available.
+    if (d.ldrRaw == null && d.ldr != null) state.sensors.ldrRaw = Number(d.ldr);
+    if (d.lightPct != null && d.ldrPct == null) state.sensors.ldrPct = Number(d.lightPct);
+    else if (d.ldrPct == null && d.light == null) state.sensors.ldrPct = null;
+    renderSensors();
+    setLink('● LIVE from ' + link.ip, 'bg-emerald-500/20 text-emerald-300');
+  } catch (e) {
+    clearTimeout(t);
+    if (++link.fails >= 3) setLink('● No response from ' + link.ip, 'bg-rose-500/20 text-rose-300');
+  }
+}
+
+function connectESP32() {
+  link.ip = document.getElementById('esp-ip').value.trim() || '192.168.4.1';
+  try { localStorage.setItem('esp_ip', link.ip); } catch (e) {}
+  link.mode = 'live'; link.fails = 0;
+  setLink('Connecting to ' + link.ip + '…', 'bg-amber-500/20 text-amber-300');
+  pollESP32();
+}
+
+function useDemo() {
+  link.mode = 'demo';
+  setLink('Demo mode (simulated)', 'bg-slate-700 text-slate-300');
+  refreshSensors();
+}
+
+function refreshSensors() {
+  if (link.mode === 'live') return pollESP32();
+  const s = state.sensors;
+  s.soil = Math.floor(25 + Math.random()*45);
+  s.humidity = Math.floor(40 + Math.random()*40);
+  s.temp = +(22 + Math.random()*12).toFixed(1);
+  s.rain = Math.random() > 0.75;
+  s.ldrRaw = Math.floor(250 + Math.random() * 3600);
+  s.ldrPct = null;
+  renderSensors();
+}
+
+function renderSensors() {
+  const s = state.sensors;
+  document.getElementById('soil-val').textContent = Math.round(s.soil) + '%';
+  document.getElementById('hum-val').textContent = Math.round(s.humidity) + '%';
+  document.getElementById('temp-val').textContent = Number(s.temp).toFixed(1) + '°C';
+  document.getElementById('rain-val').textContent = s.rain ? 'Yes' : 'No';
+  document.getElementById('soil-status').textContent = level(s.soil,30,60);
+  document.getElementById('hum-status').textContent = level(s.humidity,40,70);
+  document.getElementById('temp-status').textContent = s.temp < 18 ? 'Low' : s.temp > 32 ? 'High' : 'Optimal';
+  document.getElementById('rain-status').textContent = s.rain ? 'Wet – delay spray' : 'Dry – spray OK';
+  const raw = Number(s.ldrRaw ?? s.ldr ?? 0);
+  const pct = Number.isFinite(Number(s.ldrPct)) && s.ldrPct !== null ? Math.max(0, Math.min(100, Number(s.ldrPct))) : Math.max(0, Math.min(100, raw / 4095 * 100));
+  document.getElementById('ldr-val').textContent = Math.round(pct) + '%';
+  document.getElementById('ldr-raw').textContent = Number.isFinite(raw) ? Math.round(raw) : '--';
+  document.getElementById('ldr-status').textContent = pct < 30 ? 'Low ADC signal' : pct > 70 ? 'High ADC signal' : 'Mid-range ADC signal';
+  document.getElementById('ldr-meter').style.width = pct + '%';
+  document.getElementById('hero-soil').textContent = Math.round(s.soil) + '%';
+  document.getElementById('hero-hum').textContent = Math.round(s.humidity) + '%';
+  document.getElementById('hero-rain').textContent = s.rain ? 'Yes' : 'No';
+}
+
+function level(v, low, high) {
+  if (v < low) return 'Low';
+  if (v > high) return 'High';
+  return 'Moderate';
+}
+
+// ===================== LOCATION =====================
+function getLocation() {
+  if (!navigator.geolocation) {
+    document.getElementById('loc-badge').textContent = state.village + ' (mock)';
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(pos => {
+    state.location = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+    // In real system: reverse geocode → village → call UPAg / Soil Health APIs
+    document.getElementById('loc-badge').textContent = `${state.village} • ${pos.coords.latitude.toFixed(3)}, ${pos.coords.longitude.toFixed(3)}`;
+  }, () => {
+    document.getElementById('loc-badge').textContent = state.village + ' (permission denied – using demo)';
+  });
+}
+
+// ===================== VISION =====================
+function handleImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  state.imageFile = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('preview-img').src = ev.target.result;
+    const im = new Image();
+    im.onload = () => { const c = document.createElement('canvas'), k = Math.min(1, 480/im.width);
+      c.width = im.width*k; c.height = im.height*k; c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      state.imgData = c.toDataURL('image/jpeg', 0.6); };
+    im.src = ev.target.result;
+    document.getElementById('preview-container').classList.remove('hidden');
+    state.crop = document.getElementById('crop-select').value;
+    setTimeout(() => runVision(), 500);
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ---- send the image to the trained backend model ----
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = () => rej(new Error('Could not read the image file'));
+    r.readAsDataURL(file);
+  });
+}
+// Some sandboxed previews (e.g. the Claude artifact viewer) cannot pass a FormData object through postMessage
+// ("DataCloneError"). In that case the same multipart request is built by hand as a Blob, which can be cloned.
+async function multipartBlob(file, crop) {
+  const boundary = '----AgriGuard' + Math.random().toString(16).slice(2);
+  const enc = new TextEncoder();
+  const fname = String(file.name || 'leaf.jpg').replace(/["\r\n]/g, '');
+  const parts = [
+    enc.encode(`--${boundary}\r\nContent-Disposition: form-data; name="${BACKEND.fileField}"; filename="${fname}"\r\nContent-Type: ${file.type || 'application/octet-stream'}\r\n\r\n`),
+    new Uint8Array(await file.arrayBuffer()), enc.encode('\r\n')
+  ];
+  if (BACKEND.cropField) parts.push(enc.encode(`--${boundary}\r\nContent-Disposition: form-data; name="${BACKEND.cropField}"\r\n\r\n${crop}\r\n`));
+  parts.push(enc.encode(`--${boundary}--\r\n`));
+  return { body: new Blob(parts), type: 'multipart/form-data; boundary=' + boundary };
+}
+async function callBackend(file, crop) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), BACKEND.timeoutMs);
+  try {
+    let r;
+    if (BACKEND.mode === 'json') {
+      r = await fetch(BACKEND.url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image: await fileToBase64(file), crop }), signal: ctl.signal });
+    } else {
+      try {
+        const fd = new FormData();
+        fd.append(BACKEND.fileField, file, file.name);
+        if (BACKEND.cropField) fd.append(BACKEND.cropField, crop);
+        r = await fetch(BACKEND.url, { method: 'POST', body: fd, signal: ctl.signal });
+      } catch (e) {
+        if (!(e && (e.name === 'DataCloneError' || /clon/i.test(e.message || '')))) throw e;
+        const m = await multipartBlob(file, crop);
+        r = await fetch(BACKEND.url, { method: 'POST', headers: { 'Content-Type': m.type }, body: m.body, signal: ctl.signal });
+      }
+    }
+    if (!r.ok) throw new Error('Backend returned HTTP ' + r.status);
+    const text = await r.text();
+    try { return JSON.parse(text); } catch (e) { return text.trim(); }
+  } finally { clearTimeout(timer); }
+}
+
+// ---- read class name + confidence from whatever JSON shape the backend returns ----
+const LABEL_KEYS = ['disease', 'class_name', 'className', 'predicted_class', 'predicted_label', 'class', 'label', 'prediction', 'predicted_disease', 'name'];
+const CONF_KEYS = ['confidence', 'probability', 'score', 'prob', 'conf'];
+const IDX_KEYS = ['class_index', 'class_id', 'index', 'predicted_index'];
+const toPct = v => { v = Number(v); if (!Number.isFinite(v)) return null; return v <= 1 ? v * 100 : v; };
+const confOf = o => { if (!o || typeof o !== 'object') return null; for (const k of CONF_KEYS) if (o[k] != null && Number.isFinite(Number(o[k]))) return toPct(o[k]); return null; };
+const fromIndex = i => (Number.isInteger(Number(i)) && BACKEND.classOrder[Number(i)]) || null;
+function fromScores(arr) {
+  const nums = arr.map(Number);
+  const i = nums.indexOf(Math.max(...nums));
+  return { label: fromIndex(i), confidence: toPct(nums[i]) };
+}
+function parsePrediction(d) {
+  if (d == null) return {};
+  if (typeof d === 'number') return { label: fromIndex(d) };
+  if (typeof d === 'string') return { label: fromIndex(d) || d };
+  if (Array.isArray(d)) {
+    if (!d.length) return {};
+    if (typeof d[0] === 'number') return fromScores(d);
+    const sorted = d.slice().sort((a, b) => (confOf(b) || 0) - (confOf(a) || 0));
+    return parsePrediction(sorted[0]);
+  }
+  if (typeof d !== 'object') return {};
+  const out = { crop: typeof d.crop === 'string' ? d.crop : undefined, part: d.part || d.infected_part, severity: d.severity };
+  let label = null;
+  for (const k of LABEL_KEYS) {
+    const v = d[k];
+    if (typeof v === 'string' && v) { label = v; break; }
+    if (typeof v === 'number') { label = fromIndex(v) || null; if (label) break; }
+    if (v && typeof v === 'object') { const sub = parsePrediction(v); if (sub.label) { label = sub.label; out.confidence = sub.confidence; break; } }
+  }
+  if (!label) for (const k of IDX_KEYS) if (d[k] != null && fromIndex(d[k])) { label = fromIndex(d[k]); break; }
+  if (!label) for (const k of ['result', 'predictions', 'top_k', 'top5', 'results', 'data', 'output']) {
+    if (d[k] != null) { const sub = parsePrediction(d[k]); if (sub.label) { label = sub.label; out.confidence = out.confidence ?? sub.confidence; break; } }
+  }
+  if (!label) for (const k of ['probabilities', 'scores', 'probs']) if (Array.isArray(d[k]) && typeof d[k][0] === 'number') { const s = fromScores(d[k]); if (s.label) { label = s.label; out.confidence = s.confidence; break; } }
+  out.label = label;
+  if (out.confidence == null) out.confidence = confOf(d);
+  return out;
+}
+
+function visionBox(html) { document.getElementById('vision-result').innerHTML = html; }
+const visionHeader = '<h3 class="font-semibold mb-4">Detection Result</h3>';
+
+let visionSeq = 0;
+async function runVision() {
+  const file = state.imageFile;
+  if (!file) { toast('Upload a crop image first'); return; }
+  const seq = ++visionSeq;
+  const cropSel = document.getElementById('crop-select').value;
+  visionBox(visionHeader + '<div class="flex items-center gap-3 text-sm text-slate-400"><i class="fas fa-circle-notch fa-spin"></i>Analysing leaf image with the trained model…</div>');
+  let raw, pred;
+  try {
+    raw = await callBackend(file, cropSel);
+    if (seq !== visionSeq) return;
+    pred = parsePrediction(raw);
+  } catch (err) {
+    if (seq !== visionSeq) return;
+    console.error('AgriGuard backend error:', err);
+    visionBox(visionHeader + `<div class="p-3 rounded-lg bg-rose-50 text-rose-900 text-sm space-y-1">
+      <div class="font-semibold">Could not get a prediction from the detection backend.</div>
+      <div>${escHtml(err.name === 'AbortError' ? 'Request timed out' : err.message)}</div>
+      <div class="text-xs">Endpoint: <code>${escHtml(BACKEND.url)}</code>. Make sure the trained-model server is running, allows requests from this page (CORS), and that <code>BACKEND.url</code> in the script is correct.</div></div>`);
+    return;
+  }
+  if (!pred.label) {
+    console.warn('AgriGuard: no class name found in backend response', raw);
+    visionBox(visionHeader + `<div class="p-3 rounded-lg bg-amber-50 text-amber-900 text-sm">The backend replied, but no class name could be read from the response. Check the browser console for the raw reply, or set <code>BACKEND.classOrder</code> if the model returns an index.</div>`);
+    return;
+  }
+  const rec = findTreatment(pred.label, pred.crop || cropSel);
+  const confTxt = pred.confidence != null ? pred.confidence.toFixed(1) + '%' : 'not reported';
+  if (!rec) {
+    const healthy = /healthy/i.test(pred.label);
+    visionBox(visionHeader + `<div class="space-y-3">
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Predicted class</span><span class="font-semibold text-right">${escHtml(pred.label)}</span></div>
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Confidence</span><span class="font-semibold text-right">${confTxt}</span></div>
+      <div class="mt-3 p-3 rounded-lg ${healthy ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'} text-sm">${healthy
+        ? 'The model reports a healthy leaf — no treatment is needed.'
+        : 'This class is not in the treatment table, so no pesticide/fertilizer plan could be generated. Check that the backend class names match the treatment data.'}</div></div>`);
+    return;
+  }
+  applyDetection(rec, pred);
+}
+
+function methodFor(rec) {
+  if (rec.d.kal) return 'For suspected web blight, direct spray to the lower canopy and stems. Follow the registered product label and local agronomist guidance.';
+  if (rec.d.vector) return 'Vector control: spray the listed insecticides on the crop to control the insect vector, and apply the fertilizers as per product label. Follow registered product labels and local agronomist guidance.';
+  if (rec.d.soak) return 'Soak seed setts in the carbendazim solution (water volume is given per acre), then spray the other pesticide and apply fertilizers as per product label. Follow local agronomist guidance.';
+  return 'Spray the listed pesticides over the affected plants and apply the fertilizers as per product label. Follow registered product labels and local agronomist guidance.';
+}
+
+function applyDetection(rec, pred) {
+  state.treatmentRec = rec;
+  state.crop = rec.cropLabel;
+  const sel = document.getElementById('crop-select');
+  if (sel && [...sel.options].some(o => o.value === rec.cropLabel)) sel.value = rec.cropLabel;
+  state.sevFromBackend = !!pred.severity;
+  state.disease = { name: rec.disease, part: pred.part || 'Lamina of the leaf', severity: pred.severity || 'Pending',
+                    confidence: pred.confidence, affectedPct: state.disease.affectedPct };
+  document.getElementById('dis-name').textContent = rec.disease + ' (' + rec.cropLabel + ')';
+  document.getElementById('dis-conf').textContent = 'Confidence: ' + (pred.confidence != null ? pred.confidence.toFixed(1) + '%' : 'not reported');
+  document.getElementById('dis-part').textContent = state.disease.part;
+  document.getElementById('dis-sev').textContent = pred.severity ? pred.severity : 'Enter infected area in Calculation';
+  document.getElementById('rec-pest').textContent = rec.d.pest.map(p => p.name).join('; ');
+  document.getElementById('rec-method').textContent = methodFor(rec);
+  document.getElementById('rec-fert').textContent = rec.d.fert.map(p => p.name).join('; ');
+  document.getElementById('area-val').textContent = 'Enter farm area in Calculation';
+  document.getElementById('aff-val').textContent = 'Enter infected area in Calculation';
+  const badge = document.getElementById('calc-crop-badge');
+  if (badge) badge.textContent = 'Crop: ' + rec.cropLabel;
+  visionBox(visionHeader + `<div class="space-y-3">
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Detected condition</span><span class="font-semibold text-right">${escHtml(rec.disease)}</span></div>
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Crop</span><span class="font-semibold text-right">${escHtml(rec.cropLabel)}</span></div>
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Infected part</span><span class="font-semibold text-right">${escHtml(state.disease.part)}</span></div>
+      <div class="flex justify-between gap-4"><span class="text-slate-400">Model confidence</span><span class="font-semibold text-right">${pred.confidence != null ? pred.confidence.toFixed(1) + '%' : 'not reported'}</span></div>
+      <div class="mt-2 px-4 py-3 rounded-xl bg-emerald-50 text-emerald-800 text-sm font-semibold" role="status">Disease identified. Opening the Calculation dashboard automatically…</div>
+    </div>`);
+  calculateDose();
+  // Automatically move to Calculation as soon as the uploaded crop image is processed.
+  switchTab('calculation');
+}
+
+// Acreage-based treatment calculation, driven by the detected class's treatment data.
+function calculateDose() {
+  const farmInput = document.getElementById('farm-acres');
+  const infectedInput = document.getElementById('infected-acres');
+  const farm = Number(farmInput?.value), infected = Number(infectedInput?.value);
+  const summary = document.getElementById('area-summary'), results = document.getElementById('dose-results');
+  const review = document.getElementById('review-doses');
+  if (!summary || !results || !farmInput || !infectedInput) return;
+  const rec = state.treatmentRec;
+  if (!rec) {   // nothing detected yet -> no prescription
+    summary.textContent = 'No disease detected yet. Upload a leaf image on the Sensors & Vision tab — the treatment plan and doses appear here once the model identifies the disease.';
+    results.innerHTML = ''; state.deliveryReady = false; lockDelivery(true);
+    if (review) review.innerHTML = '<div class="text-slate-400">Awaiting disease detection</div>';
+    const bd = document.getElementById('calc-crop-badge'); if (bd) bd.textContent = 'Crop: awaiting detection';
+    return;
+  }
+  const products = [
+    ...rec.d.pest.map(p => ({ ...p, cat: rec.d.vector ? 'Pesticide (vector control)' : 'Pesticide' })),
+    ...rec.d.fert.map(p => ({ ...p, cat: 'Fertilizer' }))
+  ];
+  if (!(farm > 0) || infectedInput.value === '' || infected < 0 || infected > farm) {
+    summary.textContent = 'Enter a valid total farm area and infected area. Infected acres cannot exceed total acres.';
+    results.innerHTML = ''; state.deliveryReady = false; lockDelivery(true);
+    if (review) review.innerHTML = products.map(p => `<div class="flex justify-between"><span>${escHtml(p.name)}</span><span>—</span></div>`).join('');
+    return;
+  }
+  state.areaAcres = farm; state.affectedAcres = infected;
+  state.disease.affectedPct = Math.round(infected / farm * 100);
+  const pct = 100 * infected / farm;
+  if (!state.sevFromBackend) {
+    state.disease.severity = pct < 20 ? 'Low' : pct <= 40 ? 'Medium' : 'High';
+    document.getElementById('dis-sev').textContent = state.disease.severity + ' (' + pct.toFixed(0) + '% infected)';
+  }
+  summary.innerHTML = `<strong>Total farm:</strong> ${farm.toFixed(2)} acres &nbsp; <strong>Infected:</strong> ${infected.toFixed(2)} acres &nbsp; <strong>Unaffected:</strong> ${(farm-infected).toFixed(2)} acres (${pct.toFixed(1)}% infected)`;
+  results.innerHTML = products.map(p => {
+    const qty = fmtQty(p.lo * infected, p.hi * infected, p.unit);
+    return `<div class="glass rounded-2xl p-5"><div class="text-xs uppercase tracking-wide text-slate-500">${escHtml(p.cat)} · ${escHtml(p.rate)}</div><h3 class="font-bold text-lg mt-1">${escHtml(p.name)}</h3><div class="text-sm text-slate-500 mt-3">Calculated for ${infected.toFixed(2)} infected acres</div><div class="text-2xl font-bold text-emerald-700 mt-1">${qty}</div></div>`;
+  }).join('');
+  document.getElementById('area-val').textContent = farm.toFixed(2)+' acres';
+  document.getElementById('aff-val').textContent = infected.toFixed(2)+' acres ('+pct.toFixed(1)+'%)';
+  if (review) review.innerHTML = products.map(p => `<div class="flex justify-between"><span>${escHtml(p.name)}</span><span>${fmtQty(p.lo * infected, p.hi * infected, p.unit)}</span></div>`).join('');
+}
+
+function submitCalculationForReview() {
+  const farm = Number(document.getElementById('farm-acres')?.value);
+  const infected = Number(document.getElementById('infected-acres')?.value);
+  if (!state.treatmentRec) { toast('Detect the disease first — upload a leaf image on Sensors & Vision'); return; }
+  if (!(farm > 0) || document.getElementById('infected-acres').value === '' || infected < 0 || infected > farm) { toast('Enter valid total and infected acreage first'); return; }
+  calculateDose();
+  state.areaAcres = farm; state.affectedAcres = infected;
+  switchTab('analysis'); submitForReview();
+  toast('Acreage-based plan sent for agronomist review');
+}
+
+function proceedToDelivery() {
+  state.deliveryReady = true;
+  lockDelivery(false);
+  renderPacks();
+  switchTab('delivery');
+  toast('Order pack matched — opening Delivery');
+}
+
+
+
+// ===================== DELIVERY / OPT =====================
+function renderPacks() {
+  const packEl = document.getElementById('pack-result');
+  if (packEl) packEl.innerHTML = '<p class="text-sm text-slate-600">Delivery quantities are based on the agronomist-approved treatment plan.</p>';
+}
+
+function renderDealers() {
+  const list = document.getElementById('dealer-list');
+  list.innerHTML = dealers.map(d => {
+    const hasStock = d.stock.mancozeb > 0;
+    return `<div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/50">
+      <div>
+        <div class="font-medium">${d.name}</div>
+        <div class="text-xs text-slate-400">${d.dist} km • ~${d.time} min • ★ ${d.rating}</div>
+        <div class="text-xs mt-1 ${hasStock?'text-emerald-400':'text-rose-400'}">
+          Mancozeb: ${d.stock.mancozeb} units ${hasStock?'':'• OUT OF STOCK'}
+        </div>
+      </div>
+      <button class="px-3 py-1.5 rounded-lg text-xs ${hasStock?'bg-emerald-600':'bg-slate-600'}" ${hasStock?'':'disabled'}>
+        ${hasStock?'Select':'Skip'}
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function renderPriority() {
+  // Sort by damage desc, then distance
+  const sorted = [...farmersQueue].sort((a,b) => b.damage - a.damage || a.dist - b.dist);
+  document.getElementById('priority-list').innerHTML = sorted.map((f,i) => 
+    `<div class="flex justify-between p-2 rounded-lg ${i===0?'bg-emerald-900/40':'bg-slate-800/40'}">
+      <span>${i+1}. ${f.name}</span>
+      <span class="text-xs">Damage ${f.damage}% • ${f.dist}km</span>
+    </div>`).join('');
+}
+
+function placeOrder() {
+  const method = document.getElementById('pay-method').value;
+  document.getElementById('order-status').classList.remove('hidden');
+  document.getElementById('order-status').innerHTML = `
+    <i class="fas fa-check-circle mr-2"></i>
+    Order placed via ${method}! Assigned to Krishi Seva Kendra. 
+    Expected delivery: <strong>38 minutes</strong>. Tracking link sent to your phone.
+    (In production this triggers real dealer notification + UPI intent / COD.)`;
+}
+
+// ===================== AGRONOMIST REVIEW (separate agronomist.html) =====================
+// Same-browser demo works out of the box. For a real phone, paste a Firebase Realtime DB URL here AND in agronomist.html
+// IMPORTANT: Set the SAME Firebase Realtime Database URL in BOTH farmer and agronomist files
+// for notifications to work across different devices/browsers. Example:
+// const FIREBASE_URL = 'https://your-project-default-rtdb.firebaseio.com';
+// Leave blank only for a same-origin local demo (serve both HTML files from the same local web server).
+const FIREBASE_URL = '';
+const SYNC_KEY = 'ag_case';
+const SYNC_PATH = '/agriguard_case.json';
+const Sync = {
+  channel: null,
+  async set(c) {
+    const j = JSON.stringify(c);
+    try { localStorage.setItem(SYNC_KEY, j); } catch (e) {}
+    try { if (this.channel) this.channel.postMessage(c); } catch (e) {}
+    if (FIREBASE_URL) {
+      try {
+        const r = await fetch(FIREBASE_URL.replace(/\/$/, '') + SYNC_PATH, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: j
+        });
+        if (!r.ok) throw new Error('Firebase HTTP ' + r.status);
+      } catch (e) {
+        console.error('AgriGuard Firebase write failed:', e);
+        return false;
+      }
+    }
+    return true;
+  },
+  async get() {
+    if (FIREBASE_URL) {
+      try {
+        const r = await fetch(FIREBASE_URL.replace(/\/$/, '') + SYNC_PATH + '?_=' + Date.now(), { cache: 'no-store' });
+        if (!r.ok) throw new Error('Firebase HTTP ' + r.status);
+        const c = await r.json();
+        if (c) { try { localStorage.setItem(SYNC_KEY, JSON.stringify(c)); } catch (e) {} }
+        return c;
+      } catch (e) {
+        console.error('AgriGuard Firebase read failed:', e);
+      }
+    }
+    try { return JSON.parse(localStorage.getItem(SYNC_KEY)); } catch (e) { return null; }
+  },
+  watch(cb) {
+    let last = '';
+    const emit = c => {
+      const j = JSON.stringify(c);
+      if (j !== last) { last = j; cb(c); }
+    };
+    try {
+      if ('BroadcastChannel' in window) {
+        this.channel = new BroadcastChannel('agriguard_case_sync');
+        this.channel.onmessage = e => emit(e.data);
+      }
+    } catch (e) {}
+    window.addEventListener('storage', e => {
+      if (e.key === SYNC_KEY && e.newValue) {
+        try { emit(JSON.parse(e.newValue)); } catch (err) {}
+      }
+    });
+    const poll = async () => emit(await this.get());
+    poll();
+    setInterval(poll, 1500);
+  }
+};
+state.approved = false; state.deliveryReady = false; state.caseId = null; state.imgData = null;
+let lastStatus = null;
+const txt = id => document.getElementById(id).textContent;
+
+function toast(m) {
+  const t = document.createElement('div');
+  t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-xl bg-slate-800 border border-slate-600 text-sm shadow-xl';
+  t.textContent = m; document.body.appendChild(t); setTimeout(() => t.remove(), 3000);
+}
+function lockDelivery(lock) {
+  const b = document.getElementById('delivery-btn');
+  b.classList.toggle('opacity-40', lock); b.classList.toggle('cursor-not-allowed', lock);
+  b.innerHTML = (lock ? '<i class="fas fa-lock mr-1"></i>' : '') + 'Delivery';
+}
+function setReview(cls, html) {
+  document.getElementById('review-msg').className = 'text-sm ' + cls;
+  document.getElementById('review-msg').innerHTML = html;
+}
+async function submitForReview() {
+  state.approved = false; lockDelivery(true); lastStatus = 'pending';
+  state.caseId = 'CASE-' + Date.now().toString().slice(-6);
+  document.getElementById('schedule-box').classList.add('hidden');
+  const d = state.disease, s = state.sensors;
+  const rec = state.treatmentRec || DEFAULT_REC, inf = Number(state.affectedAcres) || 0;
+  const doses = [...rec.d.pest.map(p => ({ cat: rec.d.vector ? 'Pesticide (vector control)' : 'Pesticide', p })), ...rec.d.fert.map(p => ({ cat: 'Fertilizer', p }))]
+    .map(({ cat, p }) => ({ cat, name: p.name, rate: p.rate, qty: fmtQty(p.lo * inf, p.hi * inf, p.unit) }));
+  const syncOk = await Sync.set({ id: state.caseId, status: 'pending', ts: Date.now(), village: state.village,
+    crop: rec.cropLabel, affectedAcres: inf, doses,
+    disease: d.name, part: d.part, severity: d.severity, confidence: d.confidence, affectedPct: d.affectedPct,
+    pest: txt('rec-pest'), method: txt('rec-method'), fert: txt('rec-fert'),
+    areaAcres: state.areaAcres, n: state.nReq, p: state.pReq, k: state.kReq,
+    sensors: { soil: s.soil, humidity: s.humidity, temp: s.temp, rain: s.rain, ldrRaw: s.ldrRaw, ldrPct: s.ldrPct }, img: state.imgData });
+  if (FIREBASE_URL && !syncOk) { setReview('text-rose-300', '<i class="fas fa-exclamation-triangle mr-2"></i>Could not send this case to Firebase. Check the database URL, rules and internet connection.'); toast('Case sync failed — agronomist was not notified'); return; }
+  setReview('text-amber-300', '<i class="fas fa-paper-plane mr-2"></i>Sent to the agronomist (' + state.caseId + '). Waiting for confirmation… Delivery is locked.');
+}
+function onCaseUpdate(c) {
+  if (!c || c.id !== state.caseId || c.status === lastStatus) return;
+  lastStatus = c.status;
+  if (c.status === 'approved') {
+    state.approved = true; state.deliveryReady = true; lockDelivery(false);
+    setReview('text-emerald-300', '<i class="fas fa-check-circle mr-2"></i>Agronomist approved the case. Precision fertilizer plan and split schedule calibrated.');
+    const initAcres = state.areaAcres || 2.5;
+    document.getElementById('farm-acres').value = initAcres;
+    toast('Approved — opening fertilizer calculation');
+    switchTab('calculation');
+  } else if (c.status === 'rejected') {
+    setReview('text-rose-300', '<i class="fas fa-times-circle mr-2"></i>Agronomist marked this recommendation as wrong. Please book a visit below.');
+    showSchedule();
+  }
+}
+const agroSlots = agronomists;
+function showSchedule() {
+  document.getElementById('schedule-box').classList.remove('hidden');
+  document.getElementById('agro-list').innerHTML = agronomists.map(a => `
+    <div class="p-4 rounded-xl bg-slate-800/50 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div><div class="font-medium">${a.name} • ${a.exp} yrs</div>
+      <div class="text-xs text-slate-400">${a.specialty} • ${a.dist} km away</div></div>
+      <div class="flex flex-wrap gap-2">${a.slots.map(sl => `<button onclick="bookSlot('${a.name}','${sl}')" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-xs hover:bg-indigo-500">${sl}</button>`).join('')}</div>
+    </div>`).join('');
+}
+async function bookSlot(name, slot) {
+  document.getElementById('booking-result').innerHTML = `<div class="text-emerald-400 font-medium mb-1">Visit booked!</div>
+    <p>Agronomist: <strong>${name}</strong> • Slot: <strong>${slot}</strong><br>Priority alert sent for ${state.disease.affectedPct}% damage.</p>`;
+  lastStatus = 'visit_booked';
+  const c = await Sync.get(); if (c && c.id === state.caseId) { c.status = 'visit_booked'; c.visit = { name, slot }; Sync.set(c); }
+}
+Sync.watch(onCaseUpdate);
+
+setInterval(() => { if (link.mode === 'live') pollESP32(); }, 2000);
+calculateDose();
+</script>
+</body>
+</html>

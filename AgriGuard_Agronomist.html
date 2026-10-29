@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AgriGuard — Agronomist</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+  @keyframes ring { 0%,100%{transform:rotate(0)} 20%{transform:rotate(-14deg)} 40%{transform:rotate(14deg)} 60%{transform:rotate(-8deg)} 80%{transform:rotate(8deg)} }
+  .ring { animation: ring 1s infinite; display:inline-block; }
+  @keyframes pop { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .sheet { animation: pop .3s ease-out; }
+</style>
+
+<style id="fresh-editorial-theme">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--ink:#172b21;--muted:#68766c;--paper:#f5f4ed;--card:#fffefa;--line:#dfe5d8;--green:#245b3c;--lime:#c8f169}
+*{box-sizing:border-box}body{font-family:'DM Sans',sans-serif!important;background:var(--paper)!important;color:var(--ink)!important;letter-spacing:-.012em}
+h1,h2,h3,.font-bold,.font-semibold{font-family:'Manrope',sans-serif}
+::selection{background:var(--lime);color:var(--ink)}
+.bg-slate-950,.bg-slate-900,.bg-slate-900\/60,.bg-slate-900\/95,.bg-slate-800\/60{background-color:var(--card)!important}
+.text-slate-100,.text-white{color:var(--ink)!important}.text-slate-300,.text-slate-400,.text-slate-500{color:var(--muted)!important}
+.border-slate-800,.border-slate-700{border-color:var(--line)!important}
+.bg-emerald-600,.bg-rose-600,.bg-indigo-600{background-color:var(--green)!important;color:white!important}
+header{background:rgba(250,250,245,.94)!important;border-color:var(--line)!important;backdrop-filter:blur(16px)!important;padding:18px 22px!important}
+header>div:first-child>div:first-child{font-size:1.12rem;letter-spacing:-.04em}
+header>div:first-child>div:first-child:before{content:'AG';display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:var(--green);color:#fff;font-size:11px;letter-spacing:.03em;margin-right:10px;vertical-align:middle}
+main{max-width:680px!important;padding:34px 20px!important}
+main>div{border-radius:22px!important;box-shadow:0 12px 32px rgba(30,55,35,.06)}
+main button{border-radius:13px!important}
+button{transition:transform .2s ease,filter .2s ease}button:hover{filter:brightness(.96)}button:focus-visible{outline:3px solid #b8df6b;outline-offset:3px}
+#popup>div{background:var(--card)!important;border-color:var(--line)!important;box-shadow:0 30px 90px rgba(17,35,23,.24)}
+#popup .bg-slate-800\/60{background:#f1f4ec!important;border:1px solid var(--line)}
+#popup .bg-emerald-600{background:var(--green)!important}
+#popup .bg-rose-600{background:#a94435!important}
+#p-body{line-height:1.5}
+@media(max-width:480px){header{padding:15px!important}main{padding:24px 14px!important}#popup>div{border-radius:24px 24px 0 0!important;padding:20px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="atelier-paris-theme">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--ink:#202b22;--muted:#72776b;--paper:#f7f5ef;--card:#fffdf8;--line:#e5e0d4;--green:#314b36;--lime:#d7e6a4;--clay:#b66d4d;--soft:#eeeee3}
+body{background:var(--paper)!important;color:var(--ink)!important;font-family:'DM Sans',sans-serif!important;letter-spacing:0!important}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif!important;font-weight:600!important;letter-spacing:-.045em!important}
+p{line-height:1.75}
+::selection{background:#d7e6a4;color:#202b22}
+/* Editorial hierarchy: calm typography, tactile surfaces, restrained colour. */
+.bg-slate-950,.bg-slate-900,.bg-slate-900\/50,.bg-slate-900\/60,.bg-slate-900\/95,.bg-slate-800,.bg-slate-800\/60,.bg-slate-800\/50,.bg-slate-800\/40{background-color:var(--card)!important}
+.text-slate-100,.text-white{color:var(--ink)!important}
+.text-slate-300,.text-slate-400,.text-slate-500{color:var(--muted)!important}
+.border-slate-800,.border-slate-700,.border-slate-600{border-color:var(--line)!important}
+.bg-emerald-600,.bg-emerald-500,.bg-indigo-600,.bg-indigo-500,.bg-cyan-600,.bg-rose-600{background:var(--green)!important;color:#fff!important}
+.bg-gradient-to-r,.bg-gradient-to-br{background-image:none!important}
+.from-emerald-500,.from-cyan-600,.to-cyan-500,.to-emerald-600{background-color:var(--green)!important}
+.text-transparent.bg-clip-text{color:var(--green)!important;background:none!important;-webkit-text-fill-color:var(--green)!important}
+.glass{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:5px 22px 22px 22px!important;box-shadow:0 12px 34px rgba(39,49,34,.045)!important;backdrop-filter:none!important}
+.card-hover{transition:transform .28s ease,box-shadow .28s ease!important}
+.card-hover:hover{transform:translateY(-3px)!important;box-shadow:0 18px 38px rgba(39,49,34,.09)!important}
+button{font-family:'DM Sans',sans-serif!important;letter-spacing:.005em;transition:transform .2s ease,background .2s ease!important}
+button:hover{filter:none!important;transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #b66d4d!important;outline-offset:3px}
+button.bg-gradient-to-r,button.bg-emerald-600,button.bg-indigo-600{background:var(--green)!important;color:white!important;border:1px solid var(--green)!important;box-shadow:none!important;border-radius:999px!important}
+input,select{background:#fffdf8!important;color:var(--ink)!important;border:1px solid #dcd7ca!important;border-radius:8px!important;box-shadow:none!important}
+input:focus,select:focus{border-color:var(--green)!important}
+nav,header{background:rgba(247,245,239,.94)!important;border-color:var(--line)!important;backdrop-filter:blur(14px)!important}
+#home{background:var(--paper)!important}
+#home>.absolute{background:radial-gradient(ellipse at 86% 28%,rgba(215,230,164,.36),transparent 30%),linear-gradient(115deg,#f7f5ef 0%,#f1f0e7 100%)!important}
+#home .relative.max-w-7xl{padding-top:clamp(4rem,8vw,7rem)!important;padding-bottom:clamp(4rem,8vw,7rem)!important}
+#home h1{font-family:'Playfair Display',Georgia,serif!important;font-size:clamp(3.4rem,7.2vw,6.5rem)!important;line-height:.98!important;letter-spacing:-.065em!important;max-width:780px!important}
+#home p{color:#626b5e!important;max-width:640px;line-height:1.85!important}
+#home .inline-flex.rounded-full{background:#e9eddf!important;color:#405c3d!important;border:1px solid #dce3d0!important;border-radius:999px!important;letter-spacing:.045em;font-size:.72rem!important;text-transform:uppercase}
+#home .glass{transform:rotate(.7deg);border-radius:5px 28px 28px 28px!important;box-shadow:0 25px 65px rgba(39,49,34,.09)!important}
+#features{background:#eceee5!important}
+#features h2{font-family:'Playfair Display',Georgia,serif!important;font-size:clamp(2.3rem,4.4vw,3.8rem)!important;letter-spacing:-.05em!important}
+#features .glass{min-height:180px;padding:28px!important;border-radius:5px 20px 20px 20px!important}
+#features i{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#e8eddb;color:var(--green)!important;font-size:19px!important}
+#dashboard{background:var(--paper)!important}
+#dashboard h2{font-family:'Playfair Display',Georgia,serif!important}
+#dashboard .tab-content>.glass,#dashboard .tab-content .glass{box-shadow:0 8px 26px rgba(39,49,34,.04)!important}
+#drop-zone{background:#f1f1e8!important;border-color:#c9cebd!important;border-radius:16px!important}
+#drop-zone button{background:var(--green)!important;color:white!important}
+.tab-active{background:var(--green)!important;color:white!important}
+.severity-high{background:#f5e4dd!important;color:#9c4d37!important}.severity-med{background:#f6edcf!important;color:#89601b!important}.severity-low{background:#e7eddb!important;color:#45623c!important}
+#vision-result,#review-box{background:var(--card)!important}
+#dashboard .bg-slate-800\/50,#dashboard .bg-slate-800\/40{border:1px solid var(--line)!important}
+#dashboard .text-emerald-400,#dashboard .text-emerald-300{color:#45623c!important}
+#dashboard .text-cyan-400{color:#477b72!important}
+#dashboard .text-rose-400,#dashboard .text-rose-300{color:#a9533e!important}
+#dashboard .text-amber-400,#dashboard .text-amber-300{color:#946a23!important}
+#dashboard .text-indigo-400{color:#526c52!important}
+#dashboard .bg-emerald-900\/40{background:#e8eddf!important}
+#dashboard .bg-amber-500\/10{background:#f7efd9!important}
+#dashboard .bg-rose-500\/20{background:#f5e4dd!important}
+#dashboard .bg-emerald-500\/20{background:#e7eddb!important}
+#dashboard .bg-slate-700.text-slate-300{background:#eeeee5!important}
+#dashboard .bg-slate-800\/60{background:#f1f1e8!important}
+/* Agronomist review screen */
+header{padding:19px 24px!important}
+main{max-width:720px!important;padding:38px 22px!important}
+main>div{border-radius:5px 24px 24px 24px!important;box-shadow:0 12px 34px rgba(39,49,34,.06)!important}
+#popup>div{background:var(--card)!important;border-color:var(--line)!important;box-shadow:0 28px 90px rgba(30,38,27,.22)!important;border-radius:5px 24px 24px 24px!important}
+#popup .bg-slate-800\/60{background:#f0f0e7!important;border:1px solid var(--line)!important}
+#popup .bg-rose-600{background:var(--clay)!important}
+#p-body{line-height:1.65!important}
+@media(max-width:640px){#home .relative.max-w-7xl{padding-top:48px!important;padding-bottom:54px!important}#home h1{font-size:3.45rem!important}#dashboard nav .max-w-7xl{align-items:flex-start;gap:12px;flex-direction:column}#dashboard nav .flex.gap-2{width:100%;overflow-x:auto;padding-bottom:3px}#dashboard nav .tab-btn{white-space:nowrap;padding:.6rem .8rem;font-size:12px}#features .glass{min-height:0}main{padding:24px 14px!important}#popup>div{border-radius:24px 24px 0 0!important;padding:20px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="bold-art-direction">
+/* High-impact art direction: vivid botanical colour, editorial contrast, tactile UI */
+:root{--ink:#17271d;--muted:#657267;--paper:#f5f3e9;--card:#fffef9;--line:#dcded0;--green:#1e5637;--lime:#d9ff62;--clay:#d36b4b;--soft:#e7eddb}
+body{background-color:var(--paper)!important;background-image:radial-gradient(ellipse at 8% 6%,rgba(217,255,98,.20),transparent 28%),radial-gradient(ellipse at 94% 30%,rgba(211,107,75,.07),transparent 24%)!important}
+/* Crisp contrast and richer surface details */
+.glass{border:1px solid rgba(49,75,54,.13)!important;box-shadow:0 14px 36px rgba(28,54,34,.07)!important;position:relative;overflow:hidden}
+.glass:after{content:"";position:absolute;inset:0 auto auto 0;width:58px;height:4px;background:var(--lime);opacity:.95}
+.card-hover:hover{box-shadow:0 24px 50px rgba(28,54,34,.13)!important;transform:translateY(-6px) scale(1.008)!important}
+#home{overflow:hidden!important;isolation:isolate}
+#home>.absolute{background:radial-gradient(ellipse at 83% 24%,rgba(217,255,98,.48),transparent 28%),radial-gradient(ellipse at 70% 80%,rgba(211,107,75,.12),transparent 27%),linear-gradient(125deg,#f7f5ec 0%,#edf0e2 55%,#e4ebd7 100%)!important}
+#home:before{content:"";position:absolute;z-index:-1;right:-7vw;top:7%;width:clamp(250px,37vw,560px);aspect-ratio:1;border:1px solid rgba(30,86,55,.14);border-radius:50%;box-shadow:0 0 0 28px rgba(30,86,55,.025),0 0 0 58px rgba(30,86,55,.025),0 0 0 92px rgba(30,86,55,.02);pointer-events:none}
+#home h1{font-size:clamp(3.5rem,7.5vw,7rem)!important;line-height:.91!important;letter-spacing:-.075em!important;max-width:850px!important;text-wrap:balance}
+#home h1 em,#home h1 .accent{color:var(--green)!important;font-style:normal;text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:.12em;text-underline-offset:.08em}
+#home .inline-flex.rounded-full{background:var(--lime)!important;color:#1b3825!important;border:1px solid #c6ed48!important;font-weight:700!important;box-shadow:0 5px 0 rgba(30,86,55,.06);letter-spacing:.08em!important}
+#home .glass{transform:rotate(1.1deg);border-radius:8px 30px 8px 30px!important;box-shadow:0 30px 80px rgba(30,65,39,.15)!important;border:1px solid rgba(255,255,255,.9)!important}
+#home .glass:after{height:6px;width:90px;background:var(--clay)}
+#home .glass .rounded-xl,#home .glass .rounded-2xl{border-radius:14px!important}
+#features{background:#e6ebdc!important;position:relative;overflow:hidden}
+#features:before{content:"FIELD NOTES / 01";display:block;max-width:1200px;margin:0 auto;padding:28px 24px 0;font-size:10px;letter-spacing:.22em;font-weight:700;color:#71806b}
+#features .glass{background:#fffef9!important;border-radius:7px 22px 7px 22px!important;transition:transform .3s,box-shadow .3s!important}
+#features .glass:nth-of-type(2n){background:#f2f5e8!important}
+#features i{background:var(--lime)!important;color:#244a31!important;border-radius:14px!important;box-shadow:4px 4px 0 rgba(30,86,55,.09)}
+button.bg-gradient-to-r,button.bg-emerald-600,button.bg-indigo-600,button.bg-cyan-600{background:var(--green)!important;border-color:var(--green)!important;color:#fff!important;border-radius:999px!important;box-shadow:0 5px 0 rgba(15,54,32,.14)!important;font-weight:700!important}
+button.bg-gradient-to-r:hover,button.bg-emerald-600:hover,button.bg-indigo-600:hover{background:#2b7048!important;box-shadow:0 8px 0 rgba(15,54,32,.12)!important;transform:translateY(-2px)!important}
+button.bg-rose-600{background:var(--clay)!important;border-color:var(--clay)!important;color:white!important}
+input,select{box-shadow:inset 0 1px 2px rgba(20,40,20,.025)!important}
+input:focus,select:focus{box-shadow:0 0 0 4px rgba(217,255,98,.35)!important;border-color:#71914a!important}
+#dashboard{background-image:linear-gradient(180deg,rgba(230,235,220,.6),transparent 240px)!important}
+#dashboard .tab-btn{border-radius:999px!important;transition:all .2s ease!important}
+#dashboard .tab-active{background:var(--lime)!important;color:#193a26!important;box-shadow:inset 0 0 0 1px #c6ed48!important}
+#dashboard .tab-content .glass{border-radius:8px 22px 8px 22px!important}
+#drop-zone{border:1.5px dashed #9aa98c!important;background:linear-gradient(135deg,#f5f6ed,#eaf0df)!important}
+#drop-zone:hover{border-color:var(--green)!important;background:#e8f0dc!important}
+.severity-high{background:#f9e1d8!important;color:#9c402c!important}.severity-med{background:#fff0bf!important;color:#7d570b!important}.severity-low{background:#dff2bd!important;color:#315b2d!important}
+header{box-shadow:0 1px 0 rgba(36,60,39,.06)!important}
+/* Agronomist console gets a stronger, confident decision-making hierarchy */
+body>header{border-bottom:3px solid var(--lime)!important}
+body>header .font-bold{font-family:'Playfair Display',Georgia,serif!important;font-size:1.45rem!important;letter-spacing:-.04em!important}
+body>header .text-emerald-400{color:#4c7c3c!important}
+main>div{border-radius:8px 26px 8px 26px!important;border-color:var(--line)!important;background:var(--card)!important;box-shadow:0 18px 48px rgba(28,54,34,.08)!important}
+#popup>div{border-top:5px solid var(--lime)!important}
+#popup .grid button{min-height:56px!important}
+@media(max-width:640px){#home h1{font-size:clamp(3.15rem,15vw,4.6rem)!important}#home:before{right:-45%;top:2%;opacity:.65}#home .glass{transform:none!important}#features:before{padding-left:20px}main{padding:22px 14px!important}}
+@media(prefers-reduced-motion:reduce){.card-hover:hover,button:hover{transform:none!important}}
+</style>
+
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+<header class="sticky top-0 z-10 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-4 py-3 flex items-center justify-between">
+  <div>
+    <div class="font-bold">AgriGuard <span class="text-emerald-400">Agronomist</span></div>
+    <div class="text-xs text-slate-400">Dr. Anil Sharma • Fungal diseases</div>
+  </div>
+  <span class="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300">● Online</span>
+</header>
+
+<main id="main" class="px-4 py-6 max-w-md mx-auto"></main>
+
+<!-- New-case popup -->
+<div id="popup" class="hidden fixed inset-0 z-50 bg-black/70 flex items-end sm:items-center justify-center">
+  <div class="sheet w-full max-w-md max-h-[92vh] overflow-y-auto bg-slate-900 rounded-t-3xl sm:rounded-3xl border border-slate-700 p-5">
+    <div class="text-center mb-4">
+      <div class="text-3xl ring">🔔</div>
+      <div class="font-bold text-lg mt-1">New crop case for review</div>
+      <div id="p-id" class="text-xs text-slate-400"></div>
+    </div>
+    <img id="p-img" class="hidden rounded-xl w-full max-h-56 object-cover mb-4" />
+    <div id="p-body" class="space-y-2 text-sm"></div>
+    <p class="text-center text-sm text-slate-300 mt-5 mb-3">Is the recommended pesticide, fertilizer &amp; dosage correct?</p>
+    <div class="grid grid-cols-2 gap-3">
+      <button onclick="decide('rejected')" class="py-4 rounded-2xl bg-rose-600 font-bold text-lg active:scale-95">✗ No, wrong</button>
+      <button onclick="decide('approved')" class="py-4 rounded-2xl bg-emerald-600 font-bold text-lg active:scale-95">✓ Yes, correct</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Must match the farmer dashboard. Leave '' for same-browser demo; paste your Firebase Realtime DB URL for a real phone.
+// IMPORTANT: Set the SAME Firebase Realtime Database URL in BOTH farmer and agronomist files
+// for notifications to work across different devices/browsers. Example:
+// const FIREBASE_URL = 'https://your-project-default-rtdb.firebaseio.com';
+// Leave blank only for a same-origin local demo (serve both HTML files from the same local web server).
+const FIREBASE_URL = '';
+const SYNC_KEY = 'ag_case';
+const SYNC_PATH = '/agriguard_case.json';
+const Sync = {
+  channel: null,
+  async set(c) {
+    const j = JSON.stringify(c);
+    try { localStorage.setItem(SYNC_KEY, j); } catch (e) {}
+    try { if (this.channel) this.channel.postMessage(c); } catch (e) {}
+    if (FIREBASE_URL) {
+      try {
+        const r = await fetch(FIREBASE_URL.replace(/\/$/, '') + SYNC_PATH, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: j
+        });
+        if (!r.ok) throw new Error('Firebase HTTP ' + r.status);
+      } catch (e) {
+        console.error('AgriGuard Firebase write failed:', e);
+        return false;
+      }
+    }
+    return true;
+  },
+  async get() {
+    if (FIREBASE_URL) {
+      try {
+        const r = await fetch(FIREBASE_URL.replace(/\/$/, '') + SYNC_PATH + '?_=' + Date.now(), { cache: 'no-store' });
+        if (!r.ok) throw new Error('Firebase HTTP ' + r.status);
+        const c = await r.json();
+        if (c) { try { localStorage.setItem(SYNC_KEY, JSON.stringify(c)); } catch (e) {} }
+        return c;
+      } catch (e) {
+        console.error('AgriGuard Firebase read failed:', e);
+      }
+    }
+    try { return JSON.parse(localStorage.getItem(SYNC_KEY)); } catch (e) { return null; }
+  },
+  watch(cb) {
+    let last = '';
+    const emit = c => {
+      const j = JSON.stringify(c);
+      if (j !== last) { last = j; cb(c); }
+    };
+    try {
+      if ('BroadcastChannel' in window) {
+        this.channel = new BroadcastChannel('agriguard_case_sync');
+        this.channel.onmessage = e => emit(e.data);
+      }
+    } catch (e) {}
+    window.addEventListener('storage', e => {
+      if (e.key === SYNC_KEY && e.newValue) {
+        try { emit(JSON.parse(e.newValue)); } catch (err) {}
+      }
+    });
+    const poll = async () => emit(await this.get());
+    poll();
+    setInterval(poll, 1500);
+  }
+};
+
+let current = null, seen = null;
+const row = (k, v) => `<div class="flex justify-between gap-3 bg-slate-800/60 rounded-lg px-3 py-2"><span class="text-slate-400">${k}</span><span class="font-medium text-right">${v}</span></div>`;
+const card = (icon, title, msg, cls) => `<div class="rounded-2xl border ${cls} p-6 text-center"><div class="text-4xl mb-2">${icon}</div><div class="font-semibold">${title}</div><p class="text-sm text-slate-400 mt-1">${msg}</p></div>`;
+
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+const num = (v, d = 0) => (v == null || v === '' || !Number.isFinite(Number(v))) ? '—' : Number(v).toFixed(d);
+const acres = v => (v == null || !Number.isFinite(Number(v))) ? '—' : Number(v).toFixed(2) + ' acres';
+const confTxt = c => (c.confidence == null || !Number.isFinite(Number(c.confidence))) ? '' : ' (' + Number(c.confidence).toFixed(1) + '%)';
+const sec = t => `<div class="pt-3 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">${t}</div>`;
+const doseRow = d => row(esc(d.name) + `<span class="block text-xs">${esc(d.rate)}</span>`, `<span class="font-bold text-emerald-400">${esc(d.qty)}</span>`);
+
+// Pesticide + fertilizer prescription with the dosage the farmer's Calculation tab produced
+function prescription(c) {
+  if (!Array.isArray(c.doses) || !c.doses.length)   // older cases without dose data
+    return sec('Prescription') + row('Pesticide', esc(c.pest)) + row('Method', esc(c.method)) + row('Fertilizer', esc(c.fert));
+  const pest = c.doses.filter(d => /^pesticide/i.test(d.cat)), fert = c.doses.filter(d => !/^pesticide/i.test(d.cat));
+  const forArea = ' · for ' + acres(c.affectedAcres) + ' infected';
+  return (pest.length ? sec((/vector/i.test(pest[0].cat) ? 'Pesticides (vector control)' : 'Pesticides') + forArea) + pest.map(doseRow).join('') : '') +
+         (fert.length ? sec('Fertilizers' + forArea) + fert.map(doseRow).join('') : '') +
+         sec('Application') + row('Method', esc(c.method));
+}
+
+function render(c) {
+  const m = document.getElementById('main');
+  if (!c) { m.innerHTML = card('🌾', 'No pending cases', 'You will get a pop-up here the moment a farmer finishes a crop analysis.', 'border-slate-800 bg-slate-900/60'); return; }
+  const info = `<div class="mt-4 space-y-2 text-sm">${row('Case', esc(c.id))}${row('Crop', esc(c.crop || '—'))}${row('Disease', esc(c.disease) + confTxt(c))}${row('Infected part', esc(c.part))}${row('Damage', num(c.affectedPct) + '% • ' + acres(c.affectedAcres))}</div>${prescription(c) ? '<div class="mt-2 space-y-2 text-sm">' + prescription(c) + '</div>' : ''}`;
+  if (c.status === 'pending') m.innerHTML = card('⏳', 'Waiting for your decision', 'Tap below to open the case.', 'border-amber-500/40 bg-amber-500/10') + `<button onclick="openPopup()" class="w-full mt-4 py-3 rounded-xl bg-indigo-600 font-semibold">Open case</button>`;
+  else if (c.status === 'approved') m.innerHTML = card('✅', 'You approved this recommendation', 'The farmer can now place the delivery order.', 'border-emerald-500/40 bg-emerald-500/10') + info;
+  else if (c.status === 'rejected') m.innerHTML = card('❌', 'You rejected this recommendation', 'The farmer has been asked to book a visit with an agronomist.', 'border-rose-500/40 bg-rose-500/10') + info;
+  else if (c.status === 'visit_booked') m.innerHTML = card('📅', 'Visit booked by the farmer', `${c.visit.name} • ${c.visit.slot}`, 'border-indigo-500/40 bg-indigo-500/10') + info;
+}
+
+function openPopup() {
+  const c = current; if (!c) return;
+  document.getElementById('p-id').textContent = c.id + ' • ' + c.village;
+  const img = document.getElementById('p-img');
+  if (c.img) { img.src = c.img; img.classList.remove('hidden'); } else img.classList.add('hidden');
+  const s = c.sensors || {};
+  document.getElementById('p-body').innerHTML =
+    row('Crop', esc(c.crop || '—')) +
+    row('Detected disease', esc(c.disease) + confTxt(c)) + row('Infected part', esc(c.part)) +
+    row('Severity', esc(c.severity) + ' • ' + num(c.affectedPct) + '% of farm infected') +
+    row('Farm / Infected area', acres(c.areaAcres) + ' / ' + acres(c.affectedAcres)) +
+    row('Soil / Humidity', num(s.soil) + '% / ' + num(s.humidity) + '%') +
+    row('Temp / Rain', num(s.temp, 1) + '°C / ' + (s.rain ? 'Yes' : 'No')) +
+    prescription(c);
+  document.getElementById('popup').classList.remove('hidden');
+  if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
+}
+
+async function decide(status) {
+  const c = await Sync.get();
+  if (!c || c.id !== current.id) return;
+  c.status = status; c.decidedAt = Date.now();
+  const syncOk = await Sync.set(c);
+  if (FIREBASE_URL && !syncOk) {
+    alert('Decision was not sent to the farmer. Check Firebase URL, database rules and internet connection, then try again.');
+    return;
+  }
+  document.getElementById('popup').classList.add('hidden');
+}
+
+Sync.watch(c => {
+  current = c; render(c);
+  if (c && c.status === 'pending' && c.id !== seen) { seen = c.id; openPopup(); }
+  if (!c || c.status !== 'pending') document.getElementById('popup').classList.add('hidden');
+});
+render(null);
+</script>
+</body>
+</html>

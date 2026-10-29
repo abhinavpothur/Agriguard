@@ -1,0 +1,616 @@
+{
+  "Rice": {
+    "Bacterial leaf blight": {
+      "pesticides": [
+        [
+          "Streptocycline",
+          "40 g/acre",
+          40,
+          "g"
+        ],
+        [
+          "Copper Oxychloride 50% WP",
+          "500 g/acre",
+          500,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Zinc Sulfate 21%",
+          "15 kg/acre",
+          15,
+          "kg"
+        ],
+        [
+          "MOP",
+          "25 kg/acre",
+          25,
+          "kg"
+        ]
+      ]
+    },
+    "Sheath_Blight": {
+      "pesticides": [
+        [
+          "Hexaconazole 5% EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ],
+        [
+          "Validamycin 3% L",
+          "800 ml/acre",
+          800,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Gypsum",
+          "100 kg/acre",
+          100,
+          "kg"
+        ],
+        [
+          "Urea",
+          "40 kg/acre",
+          40,
+          "kg"
+        ]
+      ]
+    },
+    "Narrow_Brown_Spot": {
+      "pesticides": [
+        [
+          "Propiconazole 25% EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ],
+        [
+          "Carbendazim 50% WP",
+          "250 g/acre",
+          250,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Soluble Silicon",
+          "4 kg/acre",
+          4,
+          "kg"
+        ],
+        [
+          "NPK 13:0:45",
+          "2.5 kg/acre",
+          2.5,
+          "kg"
+        ]
+      ]
+    }
+  },
+  "Wheat": {
+    "YellowRust": {
+      "pesticides": [
+        [
+          "Propiconazole 25% EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ],
+        [
+          "Tebuconazole 250 EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "MOP",
+          "20 kg/acre",
+          20,
+          "kg"
+        ],
+        [
+          "SSP",
+          "50 kg/acre",
+          50,
+          "kg"
+        ]
+      ]
+    },
+    "Septoria": {
+      "pesticides": [
+        [
+          "Azoxystrobin 18.2% + Difenoconazole 11.4% SC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ],
+        [
+          "Epoxiconazole 7.5% + Carbendazim 25% SC",
+          "300 ml/acre",
+          300,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Zinc Sulfate 33%",
+          "10 kg/acre",
+          10,
+          "kg"
+        ],
+        [
+          "Urea",
+          "45 kg/acre",
+          45,
+          "kg"
+        ]
+      ]
+    },
+    "Mildew": {
+      "pesticides": [
+        [
+          "Wettable Sulfur 80% WP",
+          "1 kg/acre",
+          1,
+          "kg"
+        ],
+        [
+          "Propiconazole 25% EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "DAP",
+          "50 kg/acre",
+          50,
+          "kg"
+        ],
+        [
+          "Ferrous Sulfate",
+          "10 kg/acre",
+          10,
+          "kg"
+        ]
+      ]
+    }
+  },
+  "Tomato": {
+    "Tomato__Late_blight": {
+      "pesticides": [
+        [
+          "Mancozeb 75% WP",
+          "600–800 g/acre",
+          700,
+          "g"
+        ],
+        [
+          "Metalaxyl 8% + Mancozeb 64% WP",
+          "600 g/acre",
+          600,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Calcium Nitrate",
+          "5 kg/acre",
+          5,
+          "kg"
+        ],
+        [
+          "Boron 20%",
+          "250 g/acre",
+          250,
+          "g"
+        ]
+      ]
+    },
+    "Tomato__Tomato_Yellow_Leaf_Curl_Virus": {
+      "pesticides": [
+        [
+          "Imidacloprid 17.8% SL",
+          "100 ml/acre",
+          100,
+          "ml"
+        ],
+        [
+          "Acetamiprid 20% SP",
+          "80 g/acre",
+          80,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Epsom Salt",
+          "3 kg/acre",
+          3,
+          "kg"
+        ],
+        [
+          "NPK 0:52:34",
+          "4 kg/acre",
+          4,
+          "kg"
+        ]
+      ]
+    },
+    "Tomato__Bacterial_spot": {
+      "pesticides": [
+        [
+          "Copper Hydroxide 53.8% DF",
+          "400 g/acre",
+          400,
+          "g"
+        ],
+        [
+          "Streptocycline",
+          "40 g/acre",
+          40,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Chelated Micronutrient Mix",
+          "500 g/acre",
+          500,
+          "g"
+        ],
+        [
+          "Liquid Humic Acid",
+          "500 ml/acre",
+          500,
+          "ml"
+        ]
+      ]
+    }
+  },
+  "Sugarcane": {
+    "smut": {
+      "pesticides": [
+        [
+          "Carbendazim 50% WP",
+          "Rate not specified; sett-soak uses 100 L water/acre",
+          null,
+          null
+        ],
+        [
+          "Propiconazole 25% EC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "DAP",
+          "75 kg/acre",
+          75,
+          "kg"
+        ],
+        [
+          "Urea",
+          "100 kg/acre",
+          100,
+          "kg"
+        ]
+      ]
+    },
+    "BrownRust": {
+      "pesticides": [
+        [
+          "Mancozeb 75% WP",
+          "600 g/acre",
+          600,
+          "g"
+        ],
+        [
+          "Tebuconazole 50% + Trifloxystrobin 25% WG",
+          "120 g/acre",
+          120,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "MOP",
+          "40 kg/acre",
+          40,
+          "kg"
+        ],
+        [
+          "Granular Sulphur 90%",
+          "10 kg/acre",
+          10,
+          "kg"
+        ]
+      ]
+    },
+    "Grassy shoot": {
+      "pesticides": [
+        [
+          "Dimethoate 30% EC",
+          "400 ml/acre",
+          400,
+          "ml"
+        ],
+        [
+          "Malathion 50% EC",
+          "400 ml/acre",
+          400,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Ferrous Sulfate",
+          "20 kg/acre",
+          20,
+          "kg"
+        ],
+        [
+          "Zinc Sulfate 33%",
+          "15 kg/acre",
+          15,
+          "kg"
+        ]
+      ]
+    }
+  },
+  "Spinach": {
+    "Downy-Mildew": {
+      "pesticides": [
+        [
+          "Copper Oxychloride 50% WP",
+          "400 g/acre",
+          400,
+          "g"
+        ],
+        [
+          "Cymoxanil 8% + Mancozeb 64% WP",
+          "400 g/acre",
+          400,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Ammonium Sulfate",
+          "30 kg/acre",
+          30,
+          "kg"
+        ],
+        [
+          "FYM",
+          "5 tonnes/acre",
+          5,
+          "tonnes"
+        ]
+      ]
+    },
+    "Anthracnose": {
+      "pesticides": [
+        [
+          "Carbendazim 50% WP",
+          "200 g/acre",
+          200,
+          "g"
+        ],
+        [
+          "Chlorothalonil 75% WP",
+          "400 g/acre",
+          400,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "NPK 19:19:19",
+          "2 kg/acre",
+          2,
+          "kg"
+        ],
+        [
+          "Liquid Seaweed Extract",
+          "500 ml/acre",
+          500,
+          "ml"
+        ]
+      ]
+    },
+    "Bacterial-Spot": {
+      "pesticides": [
+        [
+          "Copper Hydroxide 53.8% DF",
+          "300 g/acre",
+          300,
+          "g"
+        ],
+        [
+          "Kasugamycin 3% SL",
+          "400 ml/acre",
+          400,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Vermicompost",
+          "500 kg/acre",
+          500,
+          "kg"
+        ],
+        [
+          "Potassium Sulfate NPK 0:0:50",
+          "2 kg/acre",
+          2,
+          "kg"
+        ]
+      ]
+    }
+  },
+  "Lemon/Citrus": {
+    "Citrus_Canker": {
+      "pesticides": [
+        [
+          "Streptocycline",
+          "40 g/acre",
+          40,
+          "g"
+        ],
+        [
+          "Copper Oxychloride 50% WP",
+          "600 g/acre",
+          600,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Neem Cake",
+          "150 kg/acre",
+          150,
+          "kg"
+        ],
+        [
+          "NPK 10:26:26",
+          "1 kg/acre/year",
+          1,
+          "kg"
+        ]
+      ]
+    },
+    "Algal_Leaf_Spot": {
+      "pesticides": [
+        [
+          "Copper Oxychloride 50% WP",
+          "500 g/acre",
+          500,
+          "g"
+        ],
+        [
+          "Bordeaux Mixture 1%",
+          "200 L/acre",
+          200,
+          "L"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Manganese Sulfate",
+          "2000 g/acre",
+          2000,
+          "g"
+        ],
+        [
+          "Urea",
+          "User-provided rate unclear: '2**500 g/acre'",
+          null,
+          null
+        ]
+      ]
+    },
+    "Citrus_Scab": {
+      "pesticides": [
+        [
+          "Carbendazim 50% WP",
+          "250 g/acre",
+          250,
+          "g"
+        ],
+        [
+          "Azoxystrobin 23% SC",
+          "200 ml/acre",
+          200,
+          "ml"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Borax",
+          "500 g/acre",
+          500,
+          "g"
+        ],
+        [
+          "Zinc Sulphate",
+          "2000 g/acre",
+          2000,
+          "g"
+        ]
+      ]
+    }
+  },
+  "pinata": {
+    "Kalanchoe_Yellow_Blight": {
+      "pesticides": [
+        [
+          "Hexaconazole 5% EC",
+          "200–300 ml/acre",
+          null,
+          "ml"
+        ],
+        [
+          "Cymoxanil 8% + Mancozeb 64% WP",
+          "600 g/acre",
+          600,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Epsom Salt (Magnesium Sulfate)",
+          "2–3 kg/acre",
+          null,
+          "kg"
+        ],
+        [
+          "Chelated Micronutrient Mix (Iron, Zinc, Manganese)",
+          "500 g–1 kg/acre",
+          null,
+          "kg"
+        ]
+      ]
+    },
+    "Kalanchoe_Web_Blight": {
+      "pesticides": [
+        [
+          "Hexaconazole 5% EC",
+          "200–300 ml/acre",
+          null,
+          "ml"
+        ],
+        [
+          "Cymoxanil 8% + Mancozeb 64% WP",
+          "600 g/acre",
+          600,
+          "g"
+        ]
+      ],
+      "fertilizers": [
+        [
+          "Epsom Salt (Magnesium Sulfate)",
+          "2–3 kg/acre",
+          null,
+          "kg"
+        ],
+        [
+          "Chelated Micronutrient Mix (Iron, Zinc, Manganese)",
+          "500 g–1 kg/acre",
+          null,
+          "kg"
+        ]
+      ]
+    }
+  }
+}
